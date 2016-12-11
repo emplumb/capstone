@@ -1,0 +1,2 @@
+class InvestmentPortfolio < ApplicationRecord
+end
