@@ -1,0 +1,2 @@
+class InvestmentUserPortfoliosController < ApplicationController
+end
