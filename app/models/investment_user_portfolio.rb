@@ -1,2 +1,0 @@
-class InvestmentUserPortfolio < ApplicationRecord
-end
