@@ -1,0 +1,47 @@
+<style>
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border-bottom: 1px solid #c6c6c6;
+      border-top: 1px solid #c6c6c6;
+      text-align: left;
+      padding: 8px;
+  }
+
+  tr:nth-child(even) {
+      background-color: #dddddd;
+  }
+</style>
+
+<div class="row">
+  <p><%= link_to "View your portfolio", "#" %></p>
+</div>
+
+<h1>Leaderboard</h1>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>1 Mo. Return</th>
+      <th>YTD Return</th>
+      <th>Since Inception Return</th>
+      <th>Alpha</th>
+      <th>Risk</th>
+      <th>Risk Adjusted Return</th>
+    </tr>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td>2%</td>
+      <td>8%</td>
+      <td>30%</td>
+      <td>.90</td>
+      <td>16.1%</td>
+      <td>.40</td>
+    </tr>
+    <% end %>
+  </table>
+
