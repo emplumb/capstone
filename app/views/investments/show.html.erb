@@ -1,0 +1,5 @@
+<p><%= link_to "Home", "/" %></p>
+<h1><%= @investment.name %></h1>
+<div><%= @investment.ticker %></div>
+<div>Price: <%= number_to_currency(@investment.price) %></div>
+<div><p><%= link_to "Back to portfolio", :back %></p></div>

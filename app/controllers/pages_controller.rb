@@ -5,4 +5,5 @@ class PagesController < ApplicationController
     render "index.html.erb"
   end
 
+
 end

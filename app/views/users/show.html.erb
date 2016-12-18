@@ -21,10 +21,13 @@
   }
 </style>
 
-<h1 class="center">Leaderboard</h1>
+
+<h1><%= @user.portfolios.first.name %></h1>
+<div><p><%= link_to "Back to home", "/" %></p></div>
+<div>
   <table>
     <tr>
-      <th>User</th>
+      <th>Investments</th>
       <th class="center">1 Mo. Return</th>
       <th class="center">YTD Return</th>
       <th class="center">Since Inception Return</th>
@@ -33,9 +36,9 @@
       <th class="center">Risk Adjusted Return</th>
       <th class="center">Correlation</th>
     </tr>
-    <% @users.each do |user| %>
+    <% @user.portfolios.first.investments.each do |investment| %>
     <tr>
-      <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
+      <td><a href="/investments/<%= investment.id %>"><%= investment.ticker %></td>
       <td class="center">2%</td>
       <td class="center">8%</td>
       <td class="center">30%</td>
@@ -46,4 +49,4 @@
     </tr>
     <% end %>
   </table>
-
+</div>
