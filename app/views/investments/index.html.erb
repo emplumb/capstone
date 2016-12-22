@@ -1,0 +1,16 @@
+<%= form_tag "/investments", method: :get do %>
+  <div>
+    <%= label_tag :ticker %>
+    <%= text_field_tag :ticker %>
+    <%= submit_tag "Find stock" %>
+  </div>
+<% end %>
+
+<p><%= @ticker %></p>
+<p><!%= number_to_currency(@price) %></p>
+
+
+<div><%= @newdate %></div>
+<div>Close: <%= number_to_currency(@price) %></div>
+
+<div><%= @description.html_safe %></div>
