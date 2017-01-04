@@ -8,15 +8,16 @@
 <h2><a href="#"><%= @name %></a></h2>
 <h4><%= @symbol %></h4>
 <div><%= @time %></div>
+<p><%= @date %></p>
 <p>
-  <table>
+  <table class="inv">
     <tr>
       <td>Current price:</td>
       <td><%= number_to_currency(@current_price) %></td>
     </tr>
     <tr>
-      <td>Last price:</td>
-      <td><%= number_to_currency(@close_price) %></td>
+      <td>Open price:</td>
+      <td><%= number_to_currency(@open_price) %></td>
     </tr>
     <tr>
       <td>Day change:</td>
