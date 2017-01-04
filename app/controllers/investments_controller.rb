@@ -8,8 +8,9 @@ class InvestmentsController < ApplicationController
 
     @name = @current_day["name"]
     @symbol = @current_day["symbol"]
+    @date = @current_day["tradeTimestamp"]
     @current_price = @current_day["lastPrice"]
-    @close_price = @current_day["close"]
+    @open_price = @current_day["open"]
     @percent_change = @current_day["percentChange"]
 
 
@@ -31,10 +32,10 @@ class InvestmentsController < ApplicationController
   end
 
   def show
-    # @investment = Investment.find(params[:id])
+    @investment = Investment.find(params[:id])
 
 
-    @investment = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22AMZN%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
+    # @investment = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22AMZN%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
 
 
 
