@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def index
-    @users = User.order('name ASC')
+    @portfolios = Portfolio.order('name ASC')
     render "index.html.erb"
   end
 
