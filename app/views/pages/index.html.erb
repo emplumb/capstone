@@ -33,9 +33,9 @@
       <th class="center">Risk Adjusted Return</th>
       <th class="center">Correlation</th>
     </tr>
-    <% @users.each do |user| %>
+    <% @portfolios.each do |portfolio| %>
     <tr>
-      <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
+      <td><a href="/portfolios/<%= portfolio.id %>"><%= portfolio.name %></a></td>
       <td class="center">2%</td>
       <td class="center">8%</td>
       <td class="center">30%</td>
