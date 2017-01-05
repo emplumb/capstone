@@ -1,3 +1,11 @@
+<style type="text/css">
+  .table {
+    width: 35%;
+    float: left;
+    margin-right: 20px;
+  }
+</style>
+
 <%= form_tag "/investments", method: :get do %>
   <div>
     <%= text_field_tag :ticker %>
@@ -10,18 +18,70 @@
 <div><%= @time %></div>
 <p><%= @date %></p>
 <p>
-  <table class="inv">
-    <tr>
-      <td>Current price:</td>
-      <td><%= number_to_currency(@current_price) %></td>
-    </tr>
-    <tr>
-      <td>Open price:</td>
-      <td><%= number_to_currency(@open_price) %></td>
-    </tr>
-    <tr>
-      <td>Day change:</td>
-      <td><%= @percent_change %>%</td>
-    </tr>
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <td>Current price</td>
+        <td><%= number_to_currency(@current_price) %></td>
+      </tr>
+      <tr>
+        <td>Open Price</td>
+        <td><%= number_to_currency(@open_price) %></td>
+      </tr>
+      <tr>
+        <td>Day Change</td>
+        <td><%= @percent_change %>%</td>
+      </tr>
+      <tr>
+        <td>1yr Year Low</td>
+        <td><%= number_to_currency(@one_year_low) %></td>
+      </tr>
+      <tr>
+        <td>1yr Year High</td>
+        <td><%= number_to_currency(@one_year_high) %></td>
+      </tr>
+      <tr>
+        <td>50 day MA</td>
+        <td><%= number_to_currency(@fifty_ma) %></td>
+      </tr>
+      <tr>
+        <td>200 day MA</td>
+        <td><%= number_to_currency(@two_hundred_ma) %></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <td>Yield</td>
+        <td><%= @yield %>%</td>
+      </tr>
+      <tr>
+        <td>Ex-Div Date</td>
+        <td><%= @ex_div_date %></td>
+      </tr>
+      <tr>
+        <td>PE (TTM)</td>
+        <td><%= @price_earnings %></td>
+      </tr>
+      <tr>
+        <td>PS (TTM)</td>
+        <td><%= @price_sales %></td>
+      </tr>
+      <tr>
+        <td>EPS (TTM)</td>
+        <td><%= number_to_currency(@eps) %></td>
+      </tr>
+      <tr>
+        <td>EPS Q1 Estimate</td>
+        <td><%= number_to_currency(@eps_quarter_estimate) %></td>
+      </tr>
+      <tr>
+        <td>EPS 2016 Estimate</td>
+        <td><%= number_to_currency(@eps_year_estimate) %></td>
+      </tr>
+    </tbody>
   </table>
 </p>
+
+
