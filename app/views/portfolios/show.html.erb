@@ -22,17 +22,18 @@
 </style>
 
 <h1><%= @portfolio.name %></h1>
-<div><p><%= link_to "Back to home", "/" %></p></div>
+<div>
+  <%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
+    <div>
+      <%= text_field_tag :ticker %>
+      <%= submit_tag "Find stock" %>
+    </div>
+  <% end %>
+</div>
 
-<%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
-  <div>
-    <%= text_field_tag :ticker %>
-    <%= submit_tag "Find stock" %>
-  </div>
-<% end %>
 
-<h2><a href="#"><%= @name %></a></h2>
-<h4><%= @symbol %></h4>
+<h4><a href="#"><%= @name %></a> (<%= @symbol %>)</h4>
+
 <div><%= @time %></div>
 
 <p>
@@ -42,8 +43,8 @@
       <td><%= number_to_currency(@current_price) %></td>
     </tr>
     <tr>
-      <td>Last price:</td>
-      <td><%= number_to_currency(@close_price) %></td>
+      <td>Open price:</td>
+      <td><%= number_to_currency(@open_price) %></td>
     </tr>
     <tr>
       <td>Day change:</td>
