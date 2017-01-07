@@ -1,0 +1,35 @@
+<style type="text/css">
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border-bottom: 1px solid #c6c6c6;
+      border-top: 1px solid #c6c6c6;
+      text-align: left;
+      padding: 8px;
+  }
+
+  tr:nth-child(even).port {
+      background-color: #dddddd;
+  }
+</style>
+
+<div class="well">
+  <h1>Portfolio</h1>
+  <% @investment_portfolios.each do |investment_portfolio| %>
+    <table style="width: 30%">
+      <tr>
+        <td><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.name %></a>
+        </td>
+        <td class="text-center"><%= link_to 'X', "/investment_portfolios/#{investment_portfolio.id}", method: :delete, class:"btn btn-danger" %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <div>
+    <%= link_to "Back", "/portfolios/#{current_user.portfolios.first.id}", class: "btn btn-success"%>
+  </div>
+</div>
