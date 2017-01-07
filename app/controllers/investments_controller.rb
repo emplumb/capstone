@@ -1,6 +1,8 @@
 class InvestmentsController < ApplicationController
 
   def index
+        # @investment = Investment.find(params[:id])
+
     ticker = params[:ticker] || "AAPL"
 
     @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{ticker}").body
@@ -38,7 +40,8 @@ class InvestmentsController < ApplicationController
   end
 
   def show
-    @investment = Investment.find(params[:id])
+    @investment = Investment.find_by(id: params[:id])
+    @portfolio = Portfolio.where(id: current_user.portfolios.first.id)
 
     ticker = @investment.ticker
 
