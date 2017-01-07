@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   get "/logout" => "sessions#destroy"
 
+  get "/investment_portfolios/" => "investment_portfolios#index"
   post "/investment_portfolios/" => "investment_portfolios#create"
+  delete "/investment_portfolios/:id" => "investment_portfolios#destroy"
 
 
 end
