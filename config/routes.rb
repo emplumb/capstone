@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "/investments" => "investments#index"
   get "/investments/:id" => "investments#show"
 
+  get "/portfolios/new" => "portfolios#new"
+  post "/portfolios" => "portfolios#create"
   get "/portfolios/:id" => "portfolios#show"
+  delete "/portfolios/:id" => "portfolios#destroy"
 
   get "/signup" => "users#new"
   post "/users" => "users#create"

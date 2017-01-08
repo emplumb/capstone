@@ -1,0 +1,12 @@
+<h1>New Portfolio</h1>
+  <%= form_tag '/portfolios', method: :post do %>
+
+    <div class="form-group" style="width: 25%">
+      <%= label_tag :name %>
+      <%= text_field_tag :name, @portfolio.name, class: 'form-control'  %>
+    </div>
+      <%= hidden_field_tag :user_id, current_user.id %>
+    <div>
+      <p><%= submit_tag "Create", class: "btn btn-success" %></p>
+    </div>
+  <% end %>
