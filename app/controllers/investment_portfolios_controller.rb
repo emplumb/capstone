@@ -11,12 +11,17 @@ class InvestmentPortfoliosController < ApplicationController
   end
 
   def create
-    # investment = Investment.find(params[:investment_id])
-    investment_portfolio = InvestmentPortfolio.new(
-      investment_id: params[:investment_id],
-      portfolio_id: current_user.portfolios.first.id
-    )
-    if investment_portfolio.save
+    @ip_present = InvestmentPortfolio.find_by(investment_id: params[:investment_id], portfolio_id: current_user.portfolios.first.id)
+
+    if @ip_present
+      redirect_to "/portfolios/#{current_user.portfolios.first.id}"
+      flash[:danger] = "Your portfolio already contains this security"
+    else
+      investment_portfolio = InvestmentPortfolio.new(
+        investment_id: params[:investment_id],
+        portfolio_id: current_user.portfolios.first.id
+      )
+      investment_portfolio.save
       redirect_to "/portfolios/#{current_user.portfolios.first.id}"
       flash[:success] = "Investment successfully added to your portfolio"
     end
