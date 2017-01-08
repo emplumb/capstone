@@ -54,15 +54,27 @@
     <tbody>
       <tr>
         <td>Yield</td>
-        <td><%= @yield %>%</td>
+        <% if @yield %>
+          <td><%= @yield %>%</td>
+        <% else %>
+          <td>N/A</td>
+        <% end %>
       </tr>
       <tr>
         <td>Ex-Div Date</td>
-        <td><%= @ex_div_date %></td>
+        <% if @ex_div_date %>
+          <td><%= @ex_div_date %></td>
+        <% else %>
+          <td>N/A</td>
+        <% end %>
       </tr>
       <tr>
         <td>PE (TTM)</td>
-        <td><%= @price_earnings %></td>
+        <% if @price_earnings %>
+          <td><%= @price_earnings %></td>
+        <% else %>
+          <td>N/A</td>
+        <% end %>
       </tr>
       <tr>
         <td>PS (TTM)</td>
