@@ -99,6 +99,10 @@
   <%= form_tag "/investment_portfolios", method: :post do %>
     <%= hidden_field_tag :investment_id, @investment.id %>
     <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
+    <div>
+      <%= label_tag :weighting %> (percentage of portfolio)
+      <%= text_field_tag :weighting %>
+    </div>
     <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
   <% end %>
 </div>
