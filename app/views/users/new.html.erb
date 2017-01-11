@@ -1,27 +1,53 @@
-
-  <div class="well">
-    <h1>Signup!</h1>
-    <%= form_tag '/users', method: :post do  %>
-      <div>
-        <%= label_tag :username %>
-        <%= text_field_tag :username %>
-      </div>
-      <div>
-        <%= label_tag :name %>
-        <%= text_field_tag :name %>
-      </div>
-      <div>
-        <%= label_tag :email %>
-        <%= text_field_tag :email %>
-      </div>
-      <div>
-        <%= label_tag :password %>
-        <%= password_field_tag :password %>
-      </div>
-      <div>
-        <%= label_tag :password_confirmation %>
-        <%= password_field_tag :password_confirmation %>
-      </div>
-      <%= submit_tag "Submit" %>
-    <% end %>
+<div class="breadcrumbs">
+  <div class="container">
+    <h1 class="pull-left">Registration</h1>
+    <ul class="pull-right breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="">Pages</a></li>
+      <li class="active">Registration</li>
+    </ul>
   </div>
+</div>
+<div class="container content">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form action="/users" method="post" class="reg-page">
+        <div class="reg-header">
+          <h2>Register a new account</h2>
+          <p>Already Signed Up? Click <a href="/login" class="color-green">Sign In</a> to login your account.</p>
+        </div>
+
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <label>Name <span class="color-red">*</span></label>
+        <input type="text" name="name" id="name" class="form-control margin-bottom-20">
+
+        <label>Email Address <span class="color-red">*</span></label>
+        <input type="text" name="email" id="email" class="form-control margin-bottom-20">
+
+        <label>Username <span class="color-red">*</span></label>
+        <input type="text" name="username" id="username" class="form-control margin-bottom-20">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Password <span class="color-red">*</span></label>
+            <input type="password" name="password" id="password" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label>Confirm Password <span class="color-red">*</span></label>
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <button class="btn-u" type="submit">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
