@@ -35,19 +35,15 @@
     <link rel="stylesheet" href="/assets/plugins/layer-slider/layerslider/css/layerslider.css">
 
     <!-- CSS Theme -->
-    <link rel="stylesheet" href="/assets/css/theme-colors/blue.css" id="style_color">
+    <link rel="stylesheet" href="/assets/css/theme-colors/aqua.css" id="style_color">
     <link rel="stylesheet" href="/assets/css/theme-skins/dark.css">
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="/assets/css/custom.css">
   </head>
 
-
-
-
-  <body class="header-fixed header-fixed-space">
+  <body class="header-fixed header-fixed-space boxed-layout container">
     <div class="wrapper">
-      <!--=== Header v6 ===-->
       <div class="header-v6 header-classic-white header-sticky">
         <!-- Navbar -->
         <div class="navbar mega-menu" role="navigation">
@@ -130,8 +126,6 @@
         </div>
         <!-- End Navbar -->
       </div>
-      <!--=== End Header v6 ===-->
-
       <div>
         <% flash.each do |name, message| %>
           <div class="alert alert-<%= name %> alert-dismissible" role="alert">
@@ -141,10 +135,8 @@
         <% end %>
 
         <%= yield %>
-
       </div>
 
-      <!--=== Footer Version 1 ===-->
       <div class="footer-v1">
         <div class="copyright">
           <div class="container">
@@ -156,9 +148,8 @@
               </div>
             </div>
           </div>
-        </div><!--/copyright-->
+        </div>
       </div>
-      <!--=== End Footer Version 1 ===-->
     </div><!--/wrapper-->
 
     <!-- JS Global Compulsory -->
