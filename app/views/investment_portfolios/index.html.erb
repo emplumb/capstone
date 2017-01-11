@@ -1,28 +1,18 @@
-<style type="text/css">
-  table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-  }
+<!% @investment_portfolios.each do |investment_portfolio| %>
+  <!%= investment_portfolio.total_weighting %>
+<!% end %>
 
-  td, th {
-      border-bottom: 1px solid #c6c6c6;
-      border-top: 1px solid #c6c6c6;
-      text-align: left;
-      padding: 8px;
-  }
+<%= @total_weighting %>
 
-  tr:nth-child(even).port {
-      background-color: #dddddd;
-  }
-</style>
+
 
 <div class="well">
-  <h1>Portfolio</h1>
   <% @investment_portfolios.each do |investment_portfolio| %>
     <table style="width: 30%">
       <tr>
         <td><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.name %></a>
+        </td>
+        <td><%= number_to_percentage(investment_portfolio.weighting*100, :precision => 0) %></a>
         </td>
         <td class="text-center"><%= link_to 'X', "/investment_portfolios/#{investment_portfolio.id}", method: :delete, class:"btn btn-danger" %>
         </td>
