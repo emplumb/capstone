@@ -65,7 +65,7 @@
       <tr>
         <th>Investments</th>
         <th class="center">Amount</th>
-        <th class="center">Weighting</th>
+        <th class="center">G/L</th>
         <th class="center">1 Mo. Return</th>
         <th class="center">YTD Return</th>
         <th class="center">Since Inception Return</th>
@@ -77,9 +77,9 @@
       </tr>
       <% @portfolio.investment_portfolios.each do |investment_portfolio| %>
       <tr>
-        <td><strong><a href="/portfolios/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
+        <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
         <td><%= number_to_currency(investment_portfolio.dollar_amount) %></td>
-        <td class="text-center">70%<!-- <!%= number_to_percentage(investment_portfolio.weighting*100, :precision => 0) %> --></td>
+        <td class="text-center">-$400</td>
         <td class="text-center">2%</td>
         <td class="text-center">8%</td>
         <td class="text-center">30%</td>
@@ -93,7 +93,7 @@
       <tr>
         <td><strong>Total</strong></td>
         <td><%= number_to_currency(@portfolio_dollar_total) %></td>
-        <td class="text-center"><%= number_to_percentage(@total_weighting*100, :precision => 2) %></td>
+        <td class="text-center"><!%= number_to_percentage(@total_weighting*100, :precision => 2) %>asdf</td>
         <td class="text-center">34%</td>
         <td class="text-center">87%</td>
         <td class="text-center">1,111%</td>
