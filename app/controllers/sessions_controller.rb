@@ -1,7 +1,12 @@
 class SessionsController < ApplicationController
 
   def new
-    render 'new.html.erb'
+    if current_user
+      redirect_to "/"
+      flash[:warning] = "You're already logged in"
+    else
+      render 'new.html.erb'
+    end
   end
 
   def create
@@ -18,7 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:success] = 'Successfully logged out!'
+    flash[:warning] = 'Successfully logged out!'
     redirect_to '/login'
   end
 
