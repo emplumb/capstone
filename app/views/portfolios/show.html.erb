@@ -64,22 +64,22 @@
     <table class="table table-hover table-striped">
       <tr>
         <th>Investments</th>
-        <th class="center">Amount</th>
-        <th class="center">G/L</th>
-        <th class="center">1 Mo. Return</th>
-        <th class="center">YTD Return</th>
-        <th class="center">Since Inception Return</th>
-        <th class="center">Alpha</th>
-        <th class="center">Risk</th>
-        <th class="center">Risk Adjusted Return</th>
-        <th class="center">Correlation</th>
+        <th>Amount</th>
+        <th class="text-center">G/L</th>
+        <th class="text-center">1 Mo. Return</th>
+        <th class="text-center">YTD Return</th>
+        <th class="text-center">SI Return</th>
+        <th class="text-center">Alpha</th>
+        <th class="text-center">Risk</th>
+        <th class="text-center">RA Return</th>
+        <th class="text-center">Correlation</th>
         <th>Remove</th>
       </tr>
       <% @portfolio.investment_portfolios.each do |investment_portfolio| %>
       <tr>
         <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
         <td><%= number_to_currency(investment_portfolio.dollar_amount) %></td>
-        <td class="text-center">-$400</td>
+        <td class="text-center"><%= number_to_currency(-999, :precision => 2) %></td>
         <td class="text-center">2%</td>
         <td class="text-center">8%</td>
         <td class="text-center">30%</td>
