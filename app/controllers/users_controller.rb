@@ -6,7 +6,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    render "new.html.erb"
+    if current_user
+      redirect_to "/"
+      flash[:warning] = "You're already logged in"
+    else
+      render 'new.html.erb'
+    end
   end
 
   def create
