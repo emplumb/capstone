@@ -64,7 +64,7 @@
     <table class="table table-hover table-striped">
       <tr>
         <th>Investments</th>
-        <th>Amount</th>
+        <th>MV</th>
         <th class="text-center">G/L</th>
         <th class="text-center">1 Mo. Return</th>
         <th class="text-center">YTD Return</th>
@@ -79,10 +79,10 @@
       <tr>
         <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
         <td><%= number_to_currency(investment_portfolio.dollar_amount) %></td>
-        <td class="text-center"><%= number_to_currency(-999, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_currency(investment_portfolio.gain_loss) %></td>
         <td class="text-center">2%</td>
         <td class="text-center">8%</td>
-        <td class="text-center">30%</td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
         <td class="text-center">.90</td>
         <td class="text-center">16.1%</td>
         <td class="text-center">.40</td>
@@ -93,10 +93,10 @@
       <tr>
         <td><strong>Total</strong></td>
         <td><%= number_to_currency(@portfolio_dollar_total) %></td>
-        <td class="text-center"><!%= number_to_percentage(@total_weighting*100, :precision => 2) %>asdf</td>
+        <td class="text-center"><%= number_to_currency(@total_gain_loss) %></td>
         <td class="text-center">34%</td>
         <td class="text-center">87%</td>
-        <td class="text-center">1,111%</td>
+        <td class="text-center"><%= number_to_percentage(@inception_portfolio_return, :precision => 2) %></td>
         <td class="text-center">.72</td>
         <td class="text-center">50% </td>
         <td class="text-center">.72</td>
