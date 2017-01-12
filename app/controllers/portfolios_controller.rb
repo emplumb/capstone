@@ -3,10 +3,20 @@ class PortfoliosController < ApplicationController
   def show
     # @investments = Investment.all
     @portfolio = Portfolio.find(params[:id])
-    @investment_portfolios = InvestmentPortfolio.all
+    @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
+
+    @portfolio_dollar_total = 0
+    @total_weighting = 0
+    @investment_portfolios.each do |investment_portfolio|
+      @portfolio_dollar_total += investment_portfolio.dollar_amount
+      @total_weighting += investment_portfolio.weighting
+    end
+
+
 
     # if current_user
     #     @portfolio = current_user.portfolios
+    #     render "show.html.erb"
     # else
     #     redirect_to "/"
     # end
