@@ -55,7 +55,7 @@
       <tr>
         <td>Yield</td>
         <% if @yield %>
-          <td><%= @yield %>%</td>
+          <td><%= number_with_precision(@yield, precision: 2) %>%</td>
         <% else %>
           <td>N/A</td>
         <% end %>
