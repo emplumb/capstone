@@ -1,73 +1,67 @@
-<div class="container content">
-  <div class="margin-bottom-40">
-    <button class="btn-u" data-toggle="modal" data-target="#responsive">Create New Portfolio</button>
-    <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <form action="/portfolios" method="post">
-
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel4">New Portfolio</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <h4>Name</h4>
-
-                  <p><input class="form-control" type="text" name="name" id="name"></p>
-
-                  <%= hidden_field_tag :user_id, current_user.id %>
-
-                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                </div>
+<!-- modal begins -->
+<div class="margin-bottom-40">
+  <button class="btn-u" data-toggle="modal" data-target="#responsive">Create New Portfolio</button>
+  <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form action="/portfolios" method="post">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel4">New Portfolio</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Name</h4>
+                <p><input class="form-control" type="text" name="name" id="name"></p>
+                <%= hidden_field_tag :user_id, current_user.id %>
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn-u btn-u-primary">Save changes</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn-u btn-u-primary">Save changes</button>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-
-
-  <h1 class="text-center">Top 20 Monthly Performance</h1>
-  <div class="panel panel-blue margin-bottom-40">
-    <div class="panel-heading">
-      <i class="fa fa-tasks"></i>
-    </div>
-    <div class="panel-body">
-      <table class="table table-hover">
-        <tr>
-          <th>Portfolio</th>
-          <th class="center">1 Mo. Return</th>
-          <th class="center">YTD Return</th>
-          <th class="center">Since Inception Return</th>
-          <th class="center">Alpha</th>
-          <th class="center">Risk</th>
-          <th class="center">Risk Adjusted Return</th>
-          <th class="center">Correlation</th>
-        </tr>
-        <% @portfolios.each do |portfolio| %>
-        <tr>
-          <td><strong><a href="/portfolios/<%= portfolio.id %>"><%= portfolio.name %></a></strong></td>
-          <td class="text-center">2%</td>
-          <td class="text-center">8%</td>
-          <td class="text-center">30%</td>
-          <td class="text-center">.90</td>
-          <td class="text-center">16.1%</td>
-          <td class="text-center">.40</td>
-          <td class="text-center">.72</td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
+</div><!-- modal ends -->
+<!-- performance table begins -->
+<h1 class="text-center">Top 20 Monthly Performance</h1>
+<div class="panel panel-blue margin-bottom-40">
+  <div class="panel-heading">
+    <i class="fa fa-tasks"></i>
   </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <tr>
+        <th>Portfolio</th>
+        <th class="center">1 Mo. Return</th>
+        <th class="center">YTD Return</th>
+        <th class="center">Since Inception Return</th>
+        <th class="center">Alpha</th>
+        <th class="center">Risk</th>
+        <th class="center">Risk Adjusted Return</th>
+        <th class="center">Correlation</th>
+      </tr>
+      <% @portfolios.each do |portfolio| %>
+      <tr>
+        <td><strong><a href="/portfolios/<%= portfolio.id %>"><%= portfolio.name %></a></strong></td>
+        <td class="text-center">2%</td>
+        <td class="text-center">8%</td>
+        <td class="text-center">30%</td>
+        <td class="text-center">.90</td>
+        <td class="text-center">16.1%</td>
+        <td class="text-center">.40</td>
+        <td class="text-center">.72</td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div><!-- performance table ends -->
 
-</div>
 
 
 
