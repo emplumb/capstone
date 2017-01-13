@@ -77,6 +77,8 @@ class InvestmentsController < ApplicationController
     @eps_quarter_estimate = @data["EPSEstimateNextQuarter"]
     @eps_year_estimate = @data["EPSEstimateCurrentYear"]
 
+    @shares = params[:cost_basis].to_i / @current_price
+
     render "show.html.erb"
   end
 

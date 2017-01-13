@@ -64,7 +64,8 @@
     <table class="table table-hover table-striped">
       <tr>
         <th>Investments</th>
-        <th>MV</th>
+        <th>Cost</th>
+        <th class="text-center">MV</th>
         <th class="text-center">G/L</th>
         <th class="text-center">1 Mo. Return</th>
         <th class="text-center">YTD Return</th>
@@ -78,7 +79,8 @@
       <% @portfolio.investment_portfolios.each do |investment_portfolio| %>
       <tr>
         <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
-        <td><%= number_to_currency(investment_portfolio.dollar_amount) %></td>
+        <td><%= number_to_currency(investment_portfolio.cost_basis) %></td>
+        <td class="text-center">0</td>
         <td class="text-center"><%= number_to_currency(investment_portfolio.gain_loss) %></td>
         <td class="text-center">2%</td>
         <td class="text-center">8%</td>
@@ -92,7 +94,8 @@
       <% end %>
       <tr>
         <td><strong>Total</strong></td>
-        <td><%= number_to_currency(@portfolio_dollar_total) %></td>
+        <td><%= number_to_currency(@total_portfolio_cost) %></td>
+        <td class="text-center">0</td>
         <td class="text-center"><%= number_to_currency(@total_gain_loss) %></td>
         <td class="text-center">34%</td>
         <td class="text-center">87%</td>
