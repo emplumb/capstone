@@ -1,16 +1,17 @@
 class PortfoliosController < ApplicationController
 
   def show
-    # @investments = Investment.all
     @portfolio = Portfolio.find(params[:id])
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
     @total_gain_loss = 0
     @total_portfolio_cost = 0
+    @current_portfolio_value = 0
 
     @investment_portfolios.each do |investment_portfolio|
-      @total_portfolio_cost += investment_portfolio.cost_basis
-      @total_gain_loss += investment_portfolio.gain_loss
+        @total_portfolio_cost += investment_portfolio.cost_basis
+        @current_portfolio_value += (investment_portfolio.shares*investment_portfolio.investment.current_price)
+        @total_gain_loss += investment_portfolio.gain_loss
     end
 
     @inception_portfolio_return = @total_gain_loss / @total_portfolio_cost
