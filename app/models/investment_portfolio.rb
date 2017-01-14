@@ -2,8 +2,12 @@ class InvestmentPortfolio < ApplicationRecord
   belongs_to :investment
   belongs_to :portfolio
 
+  def date
+    2.days.ago.strftime("%Y-%m-%d")
+  end
+
   def quandl
-    Unirest.get("https://www.quandl.com/api/v3/datasets/WIKI/#{ticker}.json?start_date=2017-01-12&api_key=AVB8P1K72xSZsU2SyFZN").body
+    Unirest.get("https://www.quandl.com/api/v3/datasets/WIKI/#{ticker}.json?start_date=#{date}&end_date=#{date}&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def current_price
