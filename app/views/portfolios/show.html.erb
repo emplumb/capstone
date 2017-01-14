@@ -75,7 +75,7 @@
       <tr>
         <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.investment.ticker %></a></strong></td>
         <td><%= number_to_currency(investment_portfolio.cost_basis) %></td>
-        <td class="text-center"><%= number_to_currency(investment_portfolio.shares*investment_portfolio.investment.current_price) %></td>
+        <td class="text-center"><%= number_to_currency(investment_portfolio.current_value) %></td>
         <td class="text-center"><%= number_to_currency(investment_portfolio.gain_loss) %></td>
         <td class="text-center">2%</td>
         <td class="text-center">8%</td>
