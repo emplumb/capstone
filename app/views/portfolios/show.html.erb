@@ -79,7 +79,7 @@
         <td class="text-center"><%= number_to_currency(investment_portfolio.current_value) %></td>
         <td class="text-center"><%= number_to_currency(investment_portfolio.gain_loss) %></td>
 
-        <td class="text-center"><%= investment_portfolio.weighting %></td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.current_value/@total_portfolio_value*100, :precision => 2) %></td>
 
         <td class="text-center"><%= number_to_percentage(investment_portfolio.one_month_return*100, :precision => 2) %></td>
         <td class="text-center"><%= number_to_percentage(investment_portfolio.ytd_return, :precision => 2) %></td>

@@ -3,6 +3,8 @@ class InvestmentPortfoliosController < ApplicationController
   def index
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
+    @total_portfolio_value = @investment_portfolios.sum(&:current_value)
+
     if @investment_portfolios.length > 0
       render "index.html.erb"
     else
