@@ -6,11 +6,11 @@ class PortfoliosController < ApplicationController
 
     @total_gain_loss = 0
     @total_portfolio_cost = 0
-    @current_portfolio_value = 0
+    # @current_portfolio_value = 0
 
     @investment_portfolios.each do |investment_portfolio|
         @total_portfolio_cost += investment_portfolio.cost_basis
-        @current_portfolio_value += (investment_portfolio.shares*investment_portfolio.investment.current_price)
+        # @current_portfolio_value += (investment_portfolio.shares*investment_portfolio.investment.current_price)
         @total_gain_loss += investment_portfolio.gain_loss
     end
 
