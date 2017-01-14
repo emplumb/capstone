@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114043243) do
+ActiveRecord::Schema.define(version: 20170114191841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170114043243) do
     t.integer  "portfolio_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.decimal  "weighting",      precision: 3,  scale: 2
     t.decimal  "cost_basis",     precision: 10, scale: 2
     t.decimal  "purchase_price", precision: 8,  scale: 2
     t.date     "purchase_date"
