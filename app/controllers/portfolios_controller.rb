@@ -2,13 +2,14 @@ class PortfoliosController < ApplicationController
 
   def show
     @portfolio = Portfolio.find(params[:id])
+    @investment = Investment.find_by(ticker: params[:ticker])
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
     @total_portfolio_cost = @investment_portfolios.sum(&:cost_basis)
     @total_portfolio_value = @investment_portfolios.sum(&:current_value)
-    @total_gain_loss = @investment_portfolios.sum(&:gain_loss)
+    # @total_gain_loss = @investment_portfolios.sum(&:gain_loss)
 
-    @inception_portfolio_return = (@total_gain_loss / @total_portfolio_cost) || 0
+    # @inception_portfolio_return = (@total_gain_loss / @total_portfolio_cost) || 0
 
     # if current_user
     #     @portfolio = current_user.portfolios
@@ -30,7 +31,6 @@ class PortfoliosController < ApplicationController
         @percent_change = @current_day["percentChange"]
     end
 
-    @investment = Investment.where(ticker: params[:ticker])
     # @investment_portfolio = @portfolio.investment_portfolios.investment_id
     # @port = Portfolio.where(name: "Zora93 Portfolio")
 

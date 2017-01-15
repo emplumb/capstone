@@ -39,9 +39,18 @@
   </p>
   <div style="margin-bottom: 30px">
     <%= form_tag "/investment_portfolios", method: :post do %>
-      <%= hidden_field_tag :investment_id, @investment_portfolio %>
-      <!-- <!%= hidden_field_tag :investment_id, @investment_portfolios.investment.id %> -->
+      <%= hidden_field_tag :investment_id, @investment.id %>
       <%= hidden_field_tag :portfolio_id, @portfolio.id %>
+      <%= hidden_field_tag :ticker, params[:ticker] %>
+      <%= hidden_field_tag :purchase_price, @current_price %>
+      <div>
+        Dollar amount:
+        <%= text_field_tag :cost_basis %>
+      </div>
+      <div>
+        Date purchased:
+        <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
+      </div>
     <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
     <% end %>
   </div>
