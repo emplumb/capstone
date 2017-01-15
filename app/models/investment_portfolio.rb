@@ -2,6 +2,8 @@ class InvestmentPortfolio < ApplicationRecord
   belongs_to :investment
   belongs_to :portfolio
 
+  validates :cost_basis, presence: true
+
   def yesterday
     2.days.ago.strftime("%Y-%m-%d")
   end
