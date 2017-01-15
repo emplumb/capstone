@@ -7,7 +7,7 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   def quandl_yesterday
-    Unirest.get("https://www.quandl.com/api/v3/datasets/WIKI/#{ticker}.json?start_date=#{yesterday}&end_date=#{yesterday}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{yesterday}&end_date=#{yesterday}&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def current_price
@@ -31,7 +31,7 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   def quandl_month_ago
-    Unirest.get("https://www.quandl.com/api/v3/datasets/WIKI/#{ticker}.json?start_date=#{one_month_ago}&end_date=#{one_month_ago}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{one_month_ago}&end_date=#{one_month_ago}&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def month_ago_price
@@ -51,7 +51,7 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   def quandl_beginning_year
-    Unirest.get("https://www.quandl.com/api/v3/datasets/WIKI/#{ticker}.json?start_date=#{beginning_year}&end_date=#{beginning_year}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{beginning_year}&end_date=#{beginning_year}&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def beginning_year_price
@@ -67,7 +67,7 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   # def weighting
-  #   current_value / @current_portfolio_value
+  #   current_value / @total_portfolio_value
   # end
 
 end
