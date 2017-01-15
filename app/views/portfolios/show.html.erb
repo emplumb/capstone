@@ -85,14 +85,14 @@
       <tr>
         <td><strong><a href="/investments/<%= investment_portfolio.investment.id %>"><%= investment_portfolio.ticker %></a></strong></td>
         <td><%= number_to_currency(investment_portfolio.cost_basis) %></td>
-        <td class="text-center"><!%= number_to_currency(investment_portfolio.current_value) %></td>
-        <td class="text-center"><!%= number_to_currency(investment_portfolio.gain_loss) %></td>
+        <td class="text-center"><%= number_to_currency(investment_portfolio.current_value) %></td>
+        <td class="text-center"><%= number_to_currency(investment_portfolio.gain_loss) %></td>
 
-        <td class="text-center"><%= number_to_percentage(investment_portfolio.weighting() *100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.weighting() * 100, :precision => 2) %></td>
 
-        <td class="text-center"><!%= number_to_percentage(investment_portfolio.one_month_return*100, :precision => 2) %></td>
-        <td class="text-center"><!%= number_to_percentage(investment_portfolio.ytd_return, :precision => 2) %></td>
-        <td class="text-center"><!%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.one_month_return * 100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.ytd_return * 100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
         <td class="text-center">.90</td>
         <td class="text-center">16.1%</td>
         <td class="text-center">.40</td>
@@ -104,11 +104,11 @@
         <td><strong>Total</strong></td>
         <td><%= number_to_currency(@total_portfolio_cost) %></td>
         <td class="text-center"><%= number_to_currency(@total_portfolio_value) %></td>
-        <td class="text-center"><!%= number_to_currency(@total_gain_loss) %></td>
+        <td class="text-center"><%= number_to_currency(@total_gain_loss) %></td>
         <td class="text-center">100%</td>
-        <td class="text-center">1134%</td>
-        <td class="text-center">1187%</td>
-        <td class="text-center"><!%= number_to_percentage(@inception_portfolio_return, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(@portfolio_month_return * 100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(@portfolio_ytd_return * 100, :precision => 2) %></td>
+        <td class="text-center"><%= number_to_percentage(@inception_portfolio_return * 100, :precision => 2) %></td>
         <td class="text-center">.72</td>
         <td class="text-center">50% </td>
         <td class="text-center">.72</td>

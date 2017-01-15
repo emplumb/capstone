@@ -5,11 +5,13 @@ class PortfoliosController < ApplicationController
     @investment = Investment.find_by(ticker: params[:ticker])
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
-    @total_portfolio_cost = @investment_portfolios.sum(&:cost_basis)
-    @total_portfolio_value = @investment_portfolios.sum(&:current_value)
-    # @total_gain_loss = @investment_portfolios.sum(&:gain_loss)
+    @total_portfolio_cost = 0 || @investment_portfolios.sum(&:cost_basis)
+    @total_portfolio_value = 0 || @investment_portfolios.sum(&:current_value)
+    @total_gain_loss = 0 || @investment_portfolios.sum(&:gain_loss)
 
-    # @inception_portfolio_return = (@total_gain_loss / @total_portfolio_cost) || 0
+    @portfolio_month_return = 0 || @investment_portfolios.sum(&:weighted_month_return)
+    @portfolio_ytd_return = 0 || @investment_portfolios.sum(&:weighted_ytd_return)
+    @inception_portfolio_return = 0 || (@total_gain_loss / @total_portfolio_cost)
 
     # if current_user
     #     @portfolio = current_user.portfolios
