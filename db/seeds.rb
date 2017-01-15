@@ -33,7 +33,11 @@
     # {investment_id: investment.first.id, portfolio_id: portfolio.id},
     # {investment_id: investment.first.id + 2, portfolio_id: portfolio.id},
     # {investment_id: investment.first.id + 4, portfolio_id: portfolio.id},
-    {investment_id: 89, portfolio_id: 47, ticker: "^GSPC"}
+    {investment_id: 81, portfolio_id: 42, ticker: "tsla"},
+    {investment_id: 84, portfolio_id: 42, ticker: "ge"},
+    {investment_id: 85, portfolio_id: 42, ticker: "cmg"},
+    {investment_id: 87, portfolio_id: 42, ticker: "jpm"},
+    {investment_id: 88, portfolio_id: 42, ticker: "nflx"}
   ])
 # end
 

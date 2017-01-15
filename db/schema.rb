@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114191841) do
+ActiveRecord::Schema.define(version: 20170115024445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,13 +18,17 @@ ActiveRecord::Schema.define(version: 20170114191841) do
   create_table "investment_portfolios", force: :cascade do |t|
     t.integer  "investment_id"
     t.integer  "portfolio_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.decimal  "cost_basis",     precision: 10, scale: 2
-    t.decimal  "purchase_price", precision: 8,  scale: 2
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.decimal  "cost_basis",         precision: 10, scale: 2
+    t.decimal  "purchase_price",     precision: 8,  scale: 2
     t.date     "purchase_date"
     t.integer  "shares"
     t.string   "ticker"
+    t.decimal  "alpha",              precision: 3,  scale: 2
+    t.decimal  "standard_deviation", precision: 4,  scale: 2
+    t.decimal  "sharpe",             precision: 3,  scale: 2
+    t.decimal  "correlation",        precision: 3,  scale: 2
   end
 
   create_table "investments", force: :cascade do |t|
