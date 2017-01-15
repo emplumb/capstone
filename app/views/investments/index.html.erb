@@ -1,3 +1,11 @@
+<style type="text/css">
+  .table {
+    width: 35%;
+    float: left;
+    margin-right: 20px;
+  }
+</style>
+
 <%= form_tag "/investments", method: :get do %>
   <div>
     <%= text_field_tag :ticker %>
@@ -75,10 +83,22 @@
     </tbody>
   </table>
 </p>
-<div>
+
+<div style="clear: both">
   <%= form_tag "/investment_portfolios", method: :post do %>
-    <!%= hidden_field_tag :investment_id, @investment.id %>
-    <!%= hidden_field_tag :portfolio_id, @investment_portfolios.portfolios.first.id, %>
+    <%= hidden_field_tag :investment_id, @investment.id %>
+    <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
+    <%= hidden_field_tag :ticker, @ticker %>
+    <%= hidden_field_tag :purchase_price, @current_price %>
+    <div>
+      Dollar amount:
+      <%= text_field_tag :cost_basis %>
+    </div>
+    <div>
+      Date purchased:
+      <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
+    </div>
+    <p></p>
     <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
   <% end %>
 </div>

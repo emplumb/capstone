@@ -1,11 +1,12 @@
 class InvestmentsController < ApplicationController
 
   def index
-        # @investment = Investment.find(params[:id])
+    # @investments = Investment.all
+    @ticker = params[:ticker] || "aapl"
 
-    ticker = params[:ticker] || "AAPL"
+    @investment = Investment.find_by(ticker: @ticker)
 
-    @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{ticker}").body
+    @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{@ticker}").body
     @current_day = @barchart["results"][0]
 
     @name = @current_day["name"]
@@ -15,7 +16,7 @@ class InvestmentsController < ApplicationController
     @open_price = @current_day["open"]
     @percent_change = @current_day["percentChange"]
 
-    @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22#{ticker}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
+    @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22#{@ticker}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
 
     @data = @yahoo["query"]["results"]["quote"]
 
@@ -56,11 +57,8 @@ class InvestmentsController < ApplicationController
     @percent_change = @current_day["percentChange"]
 
     @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22#{ticker}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
-
     @data = @yahoo["query"]["results"]["quote"]
 
-    # @ticker = @data["symbol"].upcase
-    # @price = @data["LastTradePriceOnly"]
     @one_year_low = @data["YearLow"]
     @one_year_high = @data["YearHigh"]
     @one_year_target = @data["OneyrTargetPrice"]
