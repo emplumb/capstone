@@ -6,13 +6,6 @@
   }
 </style>
 
-<%= form_tag "/investments/#{@investment.id}", method: :get do %>
-  <div>
-    <%= text_field_tag :ticker %>
-    <%= submit_tag "Find stock" %>
-  </div>
-<% end %>
-
 <h2><%= @name %></h2>
 <h4><%= @symbol %></h4>
 <div><%= @time %></div>
@@ -99,9 +92,15 @@
   <%= form_tag "/investment_portfolios", method: :post do %>
     <%= hidden_field_tag :investment_id, @investment.id %>
     <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
+    <%= hidden_field_tag :ticker, @investment.ticker %>
+    <%= hidden_field_tag :purchase_price, @current_price %>
     <div>
       Dollar amount:
       <%= text_field_tag :cost_basis %>
+    </div>
+    <div>
+      Date purchased:
+      <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
     </div>
     <p></p>
     <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
