@@ -81,7 +81,7 @@
                 <ul class="nav navbar-nav">
                   <!-- Investments -->
                   <li class="dropdown active">
-                    <a href="/javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="/investments" class="dropdown-toggle" data-toggle="dropdown">
                       Investments
                     </a>
                     <ul class="dropdown-menu">
@@ -110,7 +110,7 @@
                         <%= current_user.username %>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a href="/portfolios/37">My Portfolio</a></li>
+                        <li><a href="/portfolios/<%= current_user.portfolios.first.id %>">My Portfolio</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/logout">Logout</a></li>
                       </ul>
