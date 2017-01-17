@@ -9,8 +9,9 @@ class PortfoliosController < ApplicationController
     @total_portfolio_value = @investment_portfolios.sum(&:current_value)
     @total_gain_loss = @investment_portfolios.sum(&:gain_loss)
 
-    @portfolio_month_return = @investment_portfolios.sum(&:weighted_month_return)
-    @portfolio_ytd_return = @investment_portfolios.sum(&:weighted_month_return)
+    # @portfolio_month_return = @investment_portfolios.sum(&:weighted_month_return)
+    @portfolio_six_month_return = @investment_portfolios.sum(&:weighted_six_month_return)
+    @portfolio_ytd_return = @investment_portfolios.sum(&:weighted_ytd_return)
     @inception_portfolio_return = (@total_gain_loss / @total_portfolio_cost)
 
     # if current_user

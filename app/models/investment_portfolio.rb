@@ -5,15 +5,18 @@ class InvestmentPortfolio < ApplicationRecord
   validates :cost_basis, presence: true
 
   def yesterday
-    2.days.ago.strftime("%Y-%m-%d")
+    1.day.ago.strftime("%Y-%m-%d")
   end
 
   def quandl_yesterday
-    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{yesterday}&end_date=#{yesterday}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{yesterday}&end_date=#{yesterday}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=2017-01-13&end_date=2017-01-13&api_key=AVB8P1K72xSZsU2SyFZN").body
+
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}/data.json?start_date=2017-01-13&end_date=2017-01-13&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def current_price
-    quandl_yesterday["dataset"]["data"][0][6]
+    quandl_yesterday["dataset_data"]["data"][0][1]
   end
 
   def current_value
@@ -45,11 +48,14 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   def quandl_month_ago
-    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{one_month_ago}&end_date=#{one_month_ago}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{one_month_ago}&end_date=#{one_month_ago}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=2016-12-19&end_date=2016-12-19&api_key=AVB8P1K72xSZsU2SyFZN").body
+
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}/data.json?start_date=2016-12-19&end_date=2016-12-19&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def month_ago_price
-    quandl_month_ago["dataset"]["data"][0][6]
+    quandl_month_ago["dataset_data"]["data"][0][1]
   end
 
   def month_ago_value
@@ -69,11 +75,14 @@ class InvestmentPortfolio < ApplicationRecord
   end
 
   def quandl_beginning_year
-    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{beginning_year}&end_date=#{beginning_year}&api_key=AVB8P1K72xSZsU2SyFZN").body
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}.json?start_date=#{beginning_year}&end_date=#{beginning_year}&api_key=AVB8P1K72xSZsU2SyFZN").body
+
+    # Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}/data.json?start_date={beginning_year}&end_date=#{beginning_year}&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}/data.json?start_date=2017-01-03&end_date=2017-01-03&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
   end
 
   def beginning_year_price
-    quandl_beginning_year["dataset"]["data"][0][4]
+    quandl_beginning_year["dataset_data"]["data"][0][1]
   end
 
   def beginning_year_value
@@ -86,6 +95,30 @@ class InvestmentPortfolio < ApplicationRecord
 
   def weighted_ytd_return
     weighting * ytd_return
+  end
+
+  def six_months_ago
+    6.months.ago.strftime("%Y-%m-%d")
+  end
+
+  def quandl_six_months_ago
+    Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{ticker}/data.json?start_date=2016-07-18&end_date=2016-07-18&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
+  end
+
+  def six_months_ago_price
+    quandl_six_months_ago["dataset_data"]["data"][0][1]
+  end
+
+  def six_months_ago_value
+    six_months_ago_price * shares
+  end
+
+  def six_month_return
+    (current_value - six_months_ago_value) / six_months_ago_value
+  end
+
+  def weighted_six_month_return
+    weighting * six_month_return
   end
 
   def inception_return
