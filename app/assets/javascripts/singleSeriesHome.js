@@ -211,7 +211,7 @@ $(function() {
         });
 
         // Create the chart
-        Highcharts.stockChart('single-series', {
+        Highcharts.stockChart('single-series-home', {
 
             rangeSelector: {
                 selected: 1
