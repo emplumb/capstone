@@ -37,6 +37,22 @@
           return sum;
         };
 
+        $scope.getTotalGainLoss = function() {
+          var sum = 0;
+          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
+            sum += parseInt($scope.gainLoss);
+          }
+          return sum;
+        };
+
+        $scope.getTotalWeighting = function() {
+          var sum = 0;
+          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
+            sum += $scope.weighting;
+          }
+          return sum;
+        };
+
       });
 
 

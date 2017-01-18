@@ -49,8 +49,8 @@
             <td>{{ getTotalCost() | currency : $ : 2 }}</td>
             <td class="text-center">-</td>
             <td class="text-center">{{ getTotalValue() | currency : $ : 2 }}</td>
-            <td class="text-center">0<!-- <!%= number_to_currency(@total_gain_loss) %> --></td>
-            <td class="text-center">100%</td>
+            <td class="text-center">{{ getTotalGainLoss() | currency : $ : 2 }}</td>
+            <td class="text-center">{{ getTotalWeighting() * 100 | number :0 }}%</td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_ytd_return * 100, :precision => 2) %> --></td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_six_month_return * 100, :precision => 2) %> --></td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@inception_portfolio_return * 100, :precision => 2) %> --></td>
