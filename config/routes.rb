@@ -21,5 +21,11 @@ Rails.application.routes.draw do
   post "/investment_portfolios/" => "investment_portfolios#create"
   delete "/investment_portfolios/:id" => "investment_portfolios#destroy"
 
+  namespace :api do
+    namespace :v1 do
+      get "/" => "portfolios#index"
+      get "/portfolios/:id" => "portfolios#show"
+    end
+  end
 
 end
