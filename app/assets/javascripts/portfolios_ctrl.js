@@ -10,7 +10,7 @@
         $scope.investmentPortfolios = response.data;
         console.log($scope.investmentPortfolios);
 
-        $scope.getCostTotal = function() {
+        $scope.getTotalCost = function() {
           var sum = 0;
           for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
             sum += parseInt($scope.investmentPortfolios[i].cost_basis);
@@ -26,11 +26,23 @@
         // for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
           $scope.currentValue = $scope.currentStockPrice * $scope.investmentPortfolios[0].shares;
           $scope.gainLoss = $scope.currentValue - $scope.investmentPortfolios[0].cost_basis;
-          $scope.weighting = $scope.currentValue / $scope.getCostTotal();
+          $scope.weighting = $scope.currentValue / $scope.getTotalCost();
         // }
 
+        $scope.getTotalValue = function() {
+          var sum = 0;
+          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
+            sum += parseInt($scope.currentValue);
+          }
+          return sum;
+        };
 
       });
+
+
+
+
+
     };
 
 
