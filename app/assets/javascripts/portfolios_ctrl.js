@@ -55,6 +55,15 @@
 
             investmentPortfolio.ytdReturn = (yesterdayPrice - beginningYearPrice) / beginningYearPrice;
           });
+          // retrieves prices 6 months ago and calculates return
+          $http.get("http://marketdata.websol.barchart.com/getHistory.json?&key=a6ff075b20922ed334cf367cab045322&startDate=20160727&type=daily&order=desc&symbol=" + investmentPortfolio.ticker).then(function(response) {
+            var stockData = response.data.results;
+
+            var sixMonthAgoPrice = stockData[stockData.length - 1].open;
+            var yesterdayPrice = stockData[0].close;
+
+            investmentPortfolio.sixMonthReturn = (yesterdayPrice - sixMonthAgoPrice) / sixMonthAgoPrice;
+          });
         });
       });
     };
