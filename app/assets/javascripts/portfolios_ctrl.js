@@ -87,6 +87,13 @@
             // console.log(purchasePrice);
 
             investmentPortfolio.sinceInceptionReturn = (yesterdayPrice - purchasePrice) / purchasePrice;
+
+            if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
+              $scope.weightedSinceInceptionReturn = 0;
+              $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
+                $scope.weightedSinceInceptionReturn += (investmentPortfolio.weighting * investmentPortfolio.sinceInceptionReturn);
+              });
+            }
           });
         });
       });
