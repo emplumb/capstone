@@ -28,6 +28,7 @@
         $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
           // retrieves current stock prices
           $http.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=" + investmentPortfolio.ticker).then(function(response) {
+            // console.log(response);
             var stockData = response.data.results[0];
 
             investmentPortfolio.currentValue = stockData.lastPrice * investmentPortfolio.shares;
@@ -45,9 +46,20 @@
               });
             }
           });
+          // retrieves beginning of year stock prices and calculates return
+          $http.get("http://marketdata.websol.barchart.com/getHistory.json?&key=a6ff075b20922ed334cf367cab045322&startDate=20170103&type=daily&order=desc&symbol=" + investmentPortfolio.ticker).then(function(response) {
+            var stockData = response.data.results;
+
+            var beginningYearPrice = stockData[stockData.length - 1].open;
+            var yesterdayPrice = stockData[0].close;
+
+            investmentPortfolio.ytdReturn = (yesterdayPrice - beginningYearPrice) / beginningYearPrice;
+          });
         });
       });
     };
+
+
 
       // $http.get("https://www.quandl.com/api/v3/datasets/YAHOO/tsla/data.json?start_date=2017-01-03&end_date=2017-01-03&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").then(function(stockData) {
       //   // $scope.investments = console.log(stockData.data);

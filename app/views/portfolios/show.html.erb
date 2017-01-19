@@ -34,7 +34,7 @@
 
             <td class="text-center">{{ investmentPortfolio.weighting * 100 | number :2 }}%</td>
 
-            <td class="text-center">0<!%= number_to_percentage(investment_portfolio.ytd_return * 100, :precision => 2) %></td>
+            <td class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number :2  }}%</td>
             <td class="text-center">0<!%= number_to_percentage(investment_portfolio.six_month_return * 100, :precision => 2) %></td>
             <td class="text-center">0<!%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
             <td class="text-center">.90</td>
