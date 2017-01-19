@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115193854) do
+ActiveRecord::Schema.define(version: 20170119021332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20170115193854) do
     t.integer  "shares"
     t.string   "ticker"
     t.decimal  "alpha",              precision: 3,  scale: 2
-    t.decimal  "standard_deviation", precision: 4,  scale: 2
     t.decimal  "sharpe",             precision: 3,  scale: 2
     t.decimal  "correlation",        precision: 3,  scale: 2
+    t.decimal  "standard_deviation", precision: 4,  scale: 4
   end
 
   create_table "investments", force: :cascade do |t|
