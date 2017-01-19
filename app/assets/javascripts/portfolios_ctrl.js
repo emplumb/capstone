@@ -9,7 +9,7 @@
       $http.get("/api/v1/portfolios/" + params.id).then(function(response) {
 
         $scope.investmentPortfolios = response.data;
-        console.log($scope.investmentPortfolios);
+        // console.log($scope.investmentPortfolios);
 
         $scope.getTotalCost = function() {
           var sum = 0;
@@ -18,7 +18,6 @@
           }
           return sum;
         };
-
         var sumCurrentValue = 0;
         $scope.totalCurrentValue = 0;
         $scope.totalGainLoss = 0;
@@ -30,6 +29,7 @@
           $http.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=" + investmentPortfolio.ticker).then(function(response) {
             // console.log(response);
             var stockData = response.data.results[0];
+            $scope.currentPrice = stockData.lastPrice;
 
             investmentPortfolio.currentValue = stockData.lastPrice * investmentPortfolio.shares;
             $scope.totalCurrentValue += investmentPortfolio.currentValue;
@@ -43,6 +43,7 @@
               $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
                 investmentPortfolio.weighting = investmentPortfolio.currentValue / $scope.totalCurrentValue;
               $scope.totalWeighting += investmentPortfolio.weighting;
+              // console.log($scope.totalWeighting);
               });
             }
           });
@@ -54,6 +55,13 @@
             var yesterdayPrice = stockData[0].close;
 
             investmentPortfolio.ytdReturn = (yesterdayPrice - beginningYearPrice) / beginningYearPrice;
+
+            if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
+              $scope.weightedYtdReturn = 0;
+              $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
+                $scope.weightedYtdReturn += (investmentPortfolio.weighting * investmentPortfolio.ytdReturn);
+              });
+            }
           });
           // retrieves prices 6 months ago and calculates return
           $http.get("http://marketdata.websol.barchart.com/getHistory.json?&key=a6ff075b20922ed334cf367cab045322&startDate=20160727&type=daily&order=desc&symbol=" + investmentPortfolio.ticker).then(function(response) {
@@ -63,6 +71,16 @@
             var yesterdayPrice = stockData[0].close;
 
             investmentPortfolio.sixMonthReturn = (yesterdayPrice - sixMonthAgoPrice) / sixMonthAgoPrice;
+          });
+          // retrieves prices since inception and calculates return
+          // console.log(investmentPortfolio.purchase_date);
+          $http.get("http://marketdata.websol.barchart.com/getHistory.json?&key=a6ff075b20922ed334cf367cab045322&startDate=" + investmentPortfolio.purchase_date + "&type=daily&order=desc&symbol=" + investmentPortfolio.ticker).then(function(response) {
+            var stockData = response.data.results;
+            var purchasePrice = stockData[stockData.length - 1].open;
+            var yesterdayPrice = stockData[0].close;
+            // console.log(purchasePrice);
+
+            investmentPortfolio.sinceInceptionReturn = (yesterdayPrice - purchasePrice) / purchasePrice;
           });
         });
       });

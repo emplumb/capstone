@@ -32,14 +32,14 @@
             <td class="text-center">{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
             <td class="text-center">{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
 
-            <td class="text-center">{{ investmentPortfolio.weighting * 100 | number :2 }}%</td>
+            <td class="text-center">{{ investmentPortfolio.weighting * 100 | number : 2 }}%</td>
 
-            <td class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number :2  }}%</td>
-            <td class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number :2  }}%</td>
-            <td class="text-center">0<!%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
+            <td class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number : 2  }}%</td>
+            <td class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
+            <td class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
             <td class="text-center">.90</td>
             <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
-            <td class="text-center">{{ investmentPortfolio.sharpe | number :2 }}</td>
+            <td class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
             <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
             <td class="text-center">0<!%= link_to 'X', "/investment_portfolios/#{investment_portfolio.id}", method: :delete, class:"btn btn-danger" %></td>
           </tr>
@@ -50,8 +50,8 @@
             <td class="text-center">-</td>
             <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
             <td class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
-            <td class="text-center">{{ totalWeighting * 100 | number :0 }}%</td>
-            <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_ytd_return * 100, :precision => 2) %> --></td>
+            <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
+            <td class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_six_month_return * 100, :precision => 2) %> --></td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@inception_portfolio_return * 100, :precision => 2) %> --></td>
             <td class="text-center">.72</td>
