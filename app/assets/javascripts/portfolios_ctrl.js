@@ -71,9 +71,15 @@
             var yesterdayPrice = stockData[0].close;
 
             investmentPortfolio.sixMonthReturn = (yesterdayPrice - sixMonthAgoPrice) / sixMonthAgoPrice;
+
+            if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
+              $scope.weightedSixMonthReturn = 0;
+              $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
+                $scope.weightedSixMonthReturn += (investmentPortfolio.weighting * investmentPortfolio.sixMonthReturn);
+              });
+            }
           });
           // retrieves prices since inception and calculates return
-          // console.log(investmentPortfolio.purchase_date);
           $http.get("http://marketdata.websol.barchart.com/getHistory.json?&key=a6ff075b20922ed334cf367cab045322&startDate=" + investmentPortfolio.purchase_date + "&type=daily&order=desc&symbol=" + investmentPortfolio.ticker).then(function(response) {
             var stockData = response.data.results;
             var purchasePrice = stockData[stockData.length - 1].open;

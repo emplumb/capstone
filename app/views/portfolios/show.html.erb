@@ -52,7 +52,7 @@
             <td class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
             <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
             <td class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
-            <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_six_month_return * 100, :precision => 2) %> --></td>
+            <td class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@inception_portfolio_return * 100, :precision => 2) %> --></td>
             <td class="text-center">.72</td>
             <td class="text-center">50% </td>
