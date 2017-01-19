@@ -29,18 +29,18 @@
             <td><strong><a href="/investments/<!%= investment_portfolio.investment.id %>">{{ investmentPortfolio.ticker }}</a></strong></td>
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
             <td>{{ investmentPortfolio.purchase_date }}</td>
-            <td class="text-center">{{ currentValue | currency : $ : 2  }}</td>
-            <td class="text-center">{{ gainLoss | currency : $ : 2 }}</td>
+            <td class="text-center">{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
+            <td class="text-center">{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
 
-            <td class="text-center">{{ weighting * 100 | number :2 }}%</td>
+            <td class="text-center">{{ investmentPortfolio.weighting * 100 | number :2 }}%</td>
 
             <td class="text-center">0<!%= number_to_percentage(investment_portfolio.ytd_return * 100, :precision => 2) %></td>
             <td class="text-center">0<!%= number_to_percentage(investment_portfolio.six_month_return * 100, :precision => 2) %></td>
             <td class="text-center">0<!%= number_to_percentage(investment_portfolio.inception_return*100, :precision => 2) %></td>
             <td class="text-center">.90</td>
-            <td class="text-center">16.1%</td>
-            <td class="text-center">.40</td>
-            <td class="text-center">.72</td>
+            <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
+            <td class="text-center">{{ investmentPortfolio.sharpe | number :2 }}</td>
+            <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
             <td class="text-center">0<!%= link_to 'X', "/investment_portfolios/#{investment_portfolio.id}", method: :delete, class:"btn btn-danger" %></td>
           </tr>
           <!% end %>
@@ -48,9 +48,9 @@
             <td><strong>Total</strong></td>
             <td>{{ getTotalCost() | currency : $ : 2 }}</td>
             <td class="text-center">-</td>
-            <td class="text-center">{{ getTotalValue() | currency : $ : 2 }}</td>
-            <td class="text-center">{{ getTotalGainLoss() | currency : $ : 2 }}</td>
-            <td class="text-center">{{ getTotalWeighting() * 100 | number :0 }}%</td>
+            <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
+            <td class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
+            <td class="text-center">{{ totalWeighting * 100 | number :0 }}%</td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_ytd_return * 100, :precision => 2) %> --></td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@portfolio_six_month_return * 100, :precision => 2) %> --></td>
             <td class="text-center">0<!-- <!%= number_to_percentage(@inception_portfolio_return * 100, :precision => 2) %> --></td>

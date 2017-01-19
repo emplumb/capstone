@@ -7,6 +7,7 @@
 
       var params = {id: 42};
       $http.get("/api/v1/portfolios/" + params.id).then(function(response) {
+
         $scope.investmentPortfolios = response.data;
         console.log($scope.investmentPortfolios);
 
@@ -17,51 +18,36 @@
           }
           return sum;
         };
+
+        var sumCurrentValue = 0;
+        $scope.totalCurrentValue = 0;
+        $scope.totalGainLoss = 0;
+        var numberinvestmentPortfoliosLoaded = 0;
+        $scope.totalWeighting = 0;
+
+        $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
+          // retrieves current stock prices
+          $http.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=" + investmentPortfolio.ticker).then(function(response) {
+            var stockData = response.data.results[0];
+
+            investmentPortfolio.currentValue = stockData.lastPrice * investmentPortfolio.shares;
+            $scope.totalCurrentValue += investmentPortfolio.currentValue;
+
+            investmentPortfolio.gainLoss = investmentPortfolio.currentValue - investmentPortfolio.cost_basis;
+            $scope.totalGainLoss += investmentPortfolio.gainLoss;
+
+            // ensures totalCurrentValue isn't calculated until all currentValues are looped through
+            numberinvestmentPortfoliosLoaded++;
+            if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
+              $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
+                investmentPortfolio.weighting = investmentPortfolio.currentValue / $scope.totalCurrentValue;
+              $scope.totalWeighting += investmentPortfolio.weighting;
+              });
+            }
+          });
+        });
       });
-
-      $http.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=ge").then(function(response) {
-        $scope.currentStockPrice = response.data.results[0].lastPrice;
-        console.log($scope.currentStockPrice);
-
-        // for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
-          $scope.currentValue = $scope.currentStockPrice * $scope.investmentPortfolios[0].shares;
-          $scope.gainLoss = $scope.currentValue - $scope.investmentPortfolios[0].cost_basis;
-          $scope.weighting = $scope.currentValue / $scope.getTotalCost();
-        // }
-
-        $scope.getTotalValue = function() {
-          var sum = 0;
-          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
-            sum += parseInt($scope.currentValue);
-          }
-          return sum;
-        };
-
-        $scope.getTotalGainLoss = function() {
-          var sum = 0;
-          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
-            sum += parseInt($scope.gainLoss);
-          }
-          return sum;
-        };
-
-        $scope.getTotalWeighting = function() {
-          var sum = 0;
-          for (var i = 0; i < $scope.investmentPortfolios.length; i++) {
-            sum += $scope.weighting;
-          }
-          return sum;
-        };
-
-      });
-
-
-
-
-
     };
-
-
 
       // $http.get("https://www.quandl.com/api/v3/datasets/YAHOO/tsla/data.json?start_date=2017-01-03&end_date=2017-01-03&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").then(function(stockData) {
       //   // $scope.investments = console.log(stockData.data);
