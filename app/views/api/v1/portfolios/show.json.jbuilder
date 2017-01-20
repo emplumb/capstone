@@ -1,6 +1,6 @@
 json.array! @portfolio.investment_portfolios.each do |investment_portfolio|
   json.id investment_portfolio.id
-  json.ticker investment_portfolio.ticker
+  json.ticker investment_portfolio.ticker.upcase
   json.portfolio_id investment_portfolio.portfolio_id
   json.investment_id investment_portfolio.investment_id
   json.purchase_price investment_portfolio.purchase_price
@@ -12,4 +12,5 @@ json.array! @portfolio.investment_portfolios.each do |investment_portfolio|
   json.sharpe investment_portfolio.sharpe
   json.correlation investment_portfolio.correlation
 end
+
 
