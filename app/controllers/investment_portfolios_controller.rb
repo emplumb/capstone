@@ -56,7 +56,7 @@ class InvestmentPortfoliosController < ApplicationController
         flash[:success] = "Investment successfully added to your portfolio"
       else
         session[:return_to] ||= request.referer
-        flash[:danger] = "You must fill in a dollar amount"
+        flash[:danger] = "Investment was not added to your portfoliio. You must fill in a dollar amount"
         redirect_to session.delete(:return_to)
       end
     end
