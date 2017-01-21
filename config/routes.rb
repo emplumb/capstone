@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get "/investment_portfolios/" => "investment_portfolios#index"
       post "/investment_portfolios/" => "investment_portfolios#create"
       delete "/investment_portfolios/:id" => "investment_portfolios#destroy"
+
+      get "/stockprices/:id" => "stockprices#show"
     end
   end
 
