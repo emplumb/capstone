@@ -41,6 +41,7 @@ class InvestmentsController < ApplicationController
   end
 
   def show
+    gon.investment = Investment.find(params[:id])
     @investment = Investment.find_by(id: params[:id])
     @portfolio = Portfolio.where(id: current_user.portfolios.first.id)
 
