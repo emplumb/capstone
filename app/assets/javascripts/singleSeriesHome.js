@@ -16,7 +16,7 @@ $(function() {
                 fontFamily: '\'Unica One\', sans-serif'
             },
             plotBorderColor: '#606063',
-            type: 'area'
+            // type: 'area'
         },
         title: {
             style: {
