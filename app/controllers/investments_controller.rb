@@ -1,9 +1,10 @@
 class InvestmentsController < ApplicationController
 
   def index
-    # @investments = Investment.all
+
     @ticker = params[:ticker] || "aapl"
 
+    gon.investment = Investment.find_by(ticker: @ticker)
     @investment = Investment.find_by(ticker: @ticker)
 
     @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{@ticker}").body
