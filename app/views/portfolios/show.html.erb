@@ -1,5 +1,67 @@
+
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
+    <h1><%= @portfolio.name %></h1>
+    <a href="/investments">Investments Index</a>
+
+    <h2><a href="/investments/84">GE</a> </h2>
+
+    <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div>
+
+
+    <div class="stock">
+      <!%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
+        <div class="form-group" style="width: 25%">
+          <!%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
+        </div>
+        <div>
+          <!%= submit_tag "Find stock", class: "btn btn-primary" %>
+        </div>
+      <!% end %>
+    </div>
+
+    <!% if params[:ticker] %>
+      <div style="margin-top: 20px">
+        <h4><a href="/investments/<!%= @investment.id %>"><!%= @name %></a> (<!%= @symbol %>)</h4>
+      </div>
+      <!-- <div><!%= @date.strftime("%b %e, %l:%M %p") %></div> -->
+      <p>
+        <table class="inv">
+          <tr>
+            <td>Current price: </td>
+            <td><!%= number_to_currency(@current_price) %></td>
+          </tr>
+          <tr>
+            <td>Open price: </td>
+            <td><!%= number_to_currency(@open_price) %></td>
+          </tr>
+          <tr>
+            <td>Day change:</td>
+            <td><!%= @percent_change %>%</td>
+          </tr>
+        </table>
+      </p>
+      <div style="margin-bottom: 30px">
+        <!%= form_tag "/investment_portfolios", method: :post do %>
+          <!%= hidden_field_tag :investment_id, @investment.id %>
+          <!%= hidden_field_tag :portfolio_id, @portfolio.id %>
+          <!%= hidden_field_tag :ticker, params[:ticker] %>
+          <!%= hidden_field_tag :purchase_price, @current_price %>
+          <div>
+            Dollar amount:
+            <!%= text_field_tag :cost_basis %>
+          </div>
+          <div>
+            Date purchased:
+            <!%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
+          </div>
+        <!%= submit_tag "Add to portfolio", class: "btn btn-success" %>
+        <!% end %>
+      </div>
+    <!% end %>
+
+    <p><a href="/investment_portfolios">I_P's</a></p>
+
     <!-- performance table begins -->
     <h1 class="text-center">Summary</h1>
     <div class="panel panel-green margin-bottom-40">
@@ -24,7 +86,6 @@
             <th class="text-center">Correlation</th>
             <th>Remove</th>
           </tr>
-          <!% @portfolio.investment_portfolios.each do |investment_portfolio| %>
           <tr ng-repeat="investmentPortfolio in investmentPortfolios">
             <td><strong><a href="/investments/<!%= investment_portfolio.investment.id %>">{{ investmentPortfolio.ticker }}</a></strong></td>
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
@@ -43,7 +104,6 @@
             <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
             <td class="text-center">0<!%= link_to 'X', "/investment_portfolios/#{investment_portfolio.id}", method: :delete, class:"btn btn-danger" %></td>
           </tr>
-          <!% end %>
           <tr>
             <td><strong>Total</strong></td>
             <td>{{ getTotalCost() | currency : $ : 2 }}</td>
@@ -55,9 +115,9 @@
             <td class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
             <td class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}%</td>
             <td class="text-center">.72</td>
-            <td class="text-center">50% </td>
-            <td class="text-center">.72</td>
-            <td class="text-center">.72</td>
+            <td class="text-center">{{ totalPortfolioRisk * 100 | number : 2 }}%</td>
+            <td class="text-center">{{ totalPortfolioSharpe | number : 2 }}</td>
+            <td class="text-center">{{ totalPortfolioCorrelation | number : 2 }}</td>
             <td class="text-center"><%= link_to 'X', "#", class:"btn btn-danger" %></td>
           </tr>
         </table>
@@ -69,63 +129,8 @@
 
 
 
-    <h1><%= @portfolio.name %></h1>
-    <a href="/investments">Investments Index</a>
 
-    <h2><a href="/investments/84">GE</a> </h2>
 
-    <div class="stock">
-      <%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
-        <div class="form-group" style="width: 25%">
-          <%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
-        </div>
-        <div>
-          <%= submit_tag "Find stock", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-
-    <% if params[:ticker] %>
-      <div style="margin-top: 20px">
-        <h4><a href="/investments/<%= @investment_portfolios.investment.id %>"><%= @name %></a> (<%= @symbol %>)</h4>
-      </div>
-      <!-- <div><!%= @date.strftime("%b %e, %l:%M %p") %></div> -->
-      <p>
-        <table class="inv">
-          <tr>
-            <td>Current price:</td>
-            <td><%= number_to_currency(@current_price) %></td>
-          </tr>
-          <tr>
-            <td>Open price:</td>
-            <td><%= number_to_currency(@open_price) %></td>
-          </tr>
-          <tr>
-            <td>Day change:</td>
-            <td><%= @percent_change %>%</td>
-          </tr>
-        </table>
-      </p>
-      <div style="margin-bottom: 30px">
-        <%= form_tag "/investment_portfolios", method: :post do %>
-          <%= hidden_field_tag :investment_id, @investment.id %>
-          <%= hidden_field_tag :portfolio_id, @portfolio.id %>
-          <%= hidden_field_tag :ticker, params[:ticker] %>
-          <%= hidden_field_tag :purchase_price, @current_price %>
-          <div>
-            Dollar amount:
-            <%= text_field_tag :cost_basis %>
-          </div>
-          <div>
-            Date purchased:
-            <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
-          </div>
-        <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <p><a href="/investment_portfolios">I_P's</a></p>
 
     <!-- performance table begins -->
 <!--     <h1 class="text-center">Summary</h1>
