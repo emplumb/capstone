@@ -31,42 +31,63 @@
   </div><!-- modal ends -->
 <% end %>
 
-<div id="single-series-home" style="height: 400px; min-width: 310px; max-width: 700px"></div>
+<!-- <div id="single-series-home" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
+<div ng-app="app">
+  <div ng-controller="homepageCtrl" ng-init="setup()">
+    <!-- performance table begins -->
+    <h1 class="text-center">Top 10 YTD Performance</h1>
+    <div class="panel panel-blue margin-bottom-40">
+      <div class="panel-heading">
+        <i class="fa fa-tasks"></i>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tr>
+            <th ng-click="changeOrderAttribute('name')">Portfolio</th>
+            <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
+            <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
+            <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">Since Inception Return</th>
+            <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
+            <th ng-click="changeOrderAttribute('sharpe')" class="text-center">Risk Adjusted Return</th>
+            <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
+          </tr>
+          <tr ng-repeat="portfolio in portfolios | orderBy:orderAttribute:isOrderDescending"">
+            <td>{{ portfolio.name }}</td>
+            <td class="text-center">2%</td>
+            <td class="text-center">8%</td>
+            <td class="text-center">30%</td>
+            <td class="text-center">16.1%</td>
+            <td class="text-center">.40</td>
+            <td class="text-center">.72</td>
+          </tr>
 
-<!-- performance table begins -->
-<h1 class="text-center">Top 20 Monthly Performance</h1>
-<div class="panel panel-blue margin-bottom-40">
-  <div class="panel-heading">
-    <i class="fa fa-tasks"></i>
+        </table>
+<!--         <table class="table table-hover">
+          <tr>
+            <th>Portfolio</th>
+            <th class="text-center">YTD Return</th>
+            <th class="text-center">6 Mo. Return</th>
+            <th class="text-center">Since Inception Return</th>
+            <th class="text-center">Risk</th>
+            <th class="text-center">Risk Adjusted Return</th>
+            <th class="text-center">Correlation</th>
+          </tr>
+          <!% @portfolios.each do |portfolio| %>
+          <tr>
+            <td><strong><!%= portfolio.name %></strong></td>
+            <td class="text-center">2%</td>
+            <td class="text-center">8%</td>
+            <td class="text-center">30%</td>
+            <td class="text-center">16.1%</td>
+            <td class="text-center">.40</td>
+            <td class="text-center">.72</td>
+          </tr>
+          <!% end %>
+        </table> -->
+      </div>
+    </div><!-- performance table ends -->
   </div>
-  <div class="panel-body">
-    <table class="table table-hover">
-      <tr>
-        <th>Portfolio</th>
-        <th class="center">1 Mo. Return</th>
-        <th class="center">YTD Return</th>
-        <th class="center">Since Inception Return</th>
-        <th class="center">Alpha</th>
-        <th class="center">Risk</th>
-        <th class="center">Risk Adjusted Return</th>
-        <th class="center">Correlation</th>
-      </tr>
-      <% @portfolios.each do |portfolio| %>
-      <tr>
-        <td><strong><a href="/portfolios/<%= portfolio.id %>"><%= portfolio.name %></a></strong></td>
-        <td class="text-center">2%</td>
-        <td class="text-center">8%</td>
-        <td class="text-center">30%</td>
-        <td class="text-center">.90</td>
-        <td class="text-center">16.1%</td>
-        <td class="text-center">.40</td>
-        <td class="text-center">.72</td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div><!-- performance table ends -->
-
+</div>
 
 
 

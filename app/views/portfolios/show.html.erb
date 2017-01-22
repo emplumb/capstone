@@ -6,16 +6,12 @@
 
     <h2><a href="/investments/84">GE</a> </h2>
 
-    <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div>
+<!--     <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
 
     <div class="stock">
       <!%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
         <div class="form-group" style="width: 25%">
-          <input ng-model="tickerFilter">
-          <div ng-repeat="investmentPortfolio in investmentPortfolios | filter: {ticker: tickerFilter}">
-            <div>{{ investmentPortfolio.ticker }}</div>
-          </div>
           <!%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
         </div>
         <div>
@@ -78,19 +74,19 @@
             <th ng-click="changeOrderAttribute('ticker')">Investments</th>
             <th ng-click="changeOrderAttribute('purchase_date')">Purchase Date</th>
             <th ng-click="changeOrderAttribute('cost_basis')">Cost</th>
-            <th ng-click="changeOrderAttribute('gain_loss')" class="text-center">G/L</th>
-            <th ng-click="changeOrderAttribute('current_value')" class="text-center">MV</th>
-            <th ng-click="changeOrderAttribute('ticker')" class="text-center">Weighting</th>
-            <th ng-click="changeOrderAttribute('ticker')" class="text-center">YTD Return</th>
-            <th ng-click="changeOrderAttribute('ticker')" class="text-center">6 Mo. Return</th>
-            <th ng-click="changeOrderAttribute('ticker')" class="text-center">SI Return</th>
+            <th ng-click="changeOrderAttribute('gainLoss')" class="text-center">G/L</th>
+            <th ng-click="changeOrderAttribute('currentValue')" class="text-center">MV</th>
+            <th ng-click="changeOrderAttribute('weighting')" class="text-center">Weighting</th>
+            <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
+            <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
+            <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">SI Return</th>
             <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
             <th ng-click="changeOrderAttribute('sharpe')" class="text-center">RA Return</th>
             <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
             <th>Remove</th>
           </tr>
           <tr ng-repeat="investmentPortfolio in investmentPortfolios | orderBy:orderAttribute:isOrderDescending">
-            <td><strong><a href="/investments/<!%= investment_portfolio.investment.id %>">{{ investmentPortfolio.ticker }}</a></strong></td>
+            <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
             <td>{{ investmentPortfolio.purchase_date }}</td>
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
             <td class="text-center">{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>

@@ -48,11 +48,11 @@
             $scope.currentPrice = dailyPrices.data.daily_prices.slice(-1)[0][1];
             console.log('current price', $scope.currentPrice);
 
-            investmentPortfolio.currentValue = $scope.currentPrice * investmentPortfolio.shares;
+            investmentPortfolio.currentValue = parseFloat($scope.currentPrice * investmentPortfolio.shares);
             $scope.totalCurrentValue += investmentPortfolio.currentValue;
 
-            investmentPortfolio.gainLoss = investmentPortfolio.currentValue - investmentPortfolio.cost_basis;
-            $scope.totalGainLoss += investmentPortfolio.gainLoss;
+            investmentPortfolio.gainLoss = parseFloat(investmentPortfolio.currentValue) - parseFloat(investmentPortfolio.cost_basis);
+            $scope.totalGainLoss += parseFloat(investmentPortfolio.gainLoss);
 
             // ensures totalCurrentValue isn't calculated until all currentValues are looped through
             numberinvestmentPortfoliosLoaded++;
@@ -60,15 +60,15 @@
 
               $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
 
-                investmentPortfolio.weighting = investmentPortfolio.currentValue / $scope.totalCurrentValue;
+                investmentPortfolio.weighting = parseFloat(investmentPortfolio.currentValue / $scope.totalCurrentValue);
                 $scope.totalWeighting += investmentPortfolio.weighting;
                 // console.log($scope.totalWeighting);
 
                 $scope.totalPortfolioRisk += ($scope.totalWeighting * investmentPortfolio.standard_deviation);
                 console.log('total port risk', $scope.totalPortfolioRisk);
 
-                $scope.totalPortfolioSharpe += ($scope.totalWeighting * investmentPortfolio.sharpe);
-                $scope.totalPortfolioCorrelation += ($scope.totalWeighting * investmentPortfolio.correlation);
+                $scope.totalPortfolioSharpe += parseFloat($scope.totalWeighting * investmentPortfolio.sharpe);
+                $scope.totalPortfolioCorrelation += parseFloat($scope.totalWeighting * investmentPortfolio.correlation);
               });
             }
           });
@@ -80,13 +80,13 @@
             var beginningYearPrice = stockData[stockData.length - 1].open;
             var yesterdayPrice = stockData[0].close;
             console.log('yesterday price', yesterdayPrice);
-            investmentPortfolio.ytdReturn = (yesterdayPrice - beginningYearPrice) / beginningYearPrice;
+            investmentPortfolio.ytdReturn = parseFloat((yesterdayPrice - beginningYearPrice) / beginningYearPrice);
 
             if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
               $scope.weightedYtdReturn = 0;
                 console.log('wtf',  $scope.weightedYtdReturn);
               $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
-                $scope.weightedYtdReturn += (investmentPortfolio.weighting * investmentPortfolio.ytdReturn);
+                $scope.weightedYtdReturn += parseFloat(investmentPortfolio.weighting * investmentPortfolio.ytdReturn);
               });
             }
           });
@@ -98,12 +98,12 @@
             var sixMonthAgoPrice = stockData[stockData.length - 1].open;
             var yesterdayPrice = stockData[0].close;
 
-            investmentPortfolio.sixMonthReturn = (yesterdayPrice - sixMonthAgoPrice) / sixMonthAgoPrice;
+            investmentPortfolio.sixMonthReturn = parseFloat((yesterdayPrice - sixMonthAgoPrice) / sixMonthAgoPrice);
 
             if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
               $scope.weightedSixMonthReturn = 0;
               $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
-                $scope.weightedSixMonthReturn += (investmentPortfolio.weighting * investmentPortfolio.sixMonthReturn);
+                $scope.weightedSixMonthReturn += parseFloat(investmentPortfolio.weighting * investmentPortfolio.sixMonthReturn);
               });
             }
           });
@@ -115,12 +115,12 @@
             var yesterdayPrice = stockData[0].close;
             // console.log(purchasePrice);
 
-            investmentPortfolio.sinceInceptionReturn = (yesterdayPrice - purchasePrice) / purchasePrice;
+            investmentPortfolio.sinceInceptionReturn = parseFloat((yesterdayPrice - purchasePrice) / purchasePrice);
 
             if (numberinvestmentPortfoliosLoaded === $scope.investmentPortfolios.length) {
               $scope.weightedSinceInceptionReturn = 0;
               $scope.investmentPortfolios.forEach(function(investmentPortfolio) {
-                $scope.weightedSinceInceptionReturn += (investmentPortfolio.weighting * investmentPortfolio.sinceInceptionReturn);
+                $scope.weightedSinceInceptionReturn += parseFloat(investmentPortfolio.weighting * investmentPortfolio.sinceInceptionReturn);
               });
             }
           });
