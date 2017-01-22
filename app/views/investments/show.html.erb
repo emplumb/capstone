@@ -6,10 +6,17 @@
   }
 </style>
 
-<h2><%= @name %></h2>
-<h4><%= @symbol %></h4>
 
-<img id="logo-show" src="<%= @investment.logo %>">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+          <h2><%= @name %></h2>
+          <h4><%= @symbol %></h4>
+        </div>
+        <div class="col-sm-2"><img id="logo-show" src="<%= @investment.logo %>"></div>
+    </div>
+</div>
+
 
 <div id="single-series-investment" style="height: 300px; max-width: 400px"></div>
 
