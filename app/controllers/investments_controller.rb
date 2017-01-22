@@ -17,12 +17,10 @@ class InvestmentsController < ApplicationController
     @open_price = @current_day["open"]
     @percent_change = @current_day["percentChange"]
 
-    @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22#{@ticker}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").body
+    @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.quotes+where+symbol+in+('#{@ticker}')&format=json&env=store://datatables.org/alltableswithkeys&callback=").body
 
     @data = @yahoo["query"]["results"]["quote"]
 
-    # @ticker = @data["symbol"].upcase
-    # @price = @data["LastTradePriceOnly"]
     @one_year_low = @data["YearLow"]
     @one_year_high = @data["YearHigh"]
     @one_year_target = @data["OneyrTargetPrice"]
