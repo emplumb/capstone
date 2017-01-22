@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122212123) do
+ActiveRecord::Schema.define(version: 20170122220152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,13 +49,12 @@ ActiveRecord::Schema.define(version: 20170122212123) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "name"
-    t.decimal  "month_return",       precision: 6, scale: 2
     t.decimal  "ytd_return",         precision: 6, scale: 2
     t.decimal  "inception_return",   precision: 6, scale: 2
-    t.decimal  "alpha",              precision: 3, scale: 2
-    t.decimal  "standard_deviation", precision: 4, scale: 2
     t.decimal  "sharpe",             precision: 3, scale: 2
     t.decimal  "correlation",        precision: 3, scale: 2
+    t.decimal  "standard_deviation", precision: 5, scale: 4
+    t.decimal  "six_month_return",   precision: 6, scale: 2
   end
 
   create_table "users", force: :cascade do |t|
