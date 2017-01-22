@@ -6,7 +6,9 @@ class Api::V1::StockpricesController < ApplicationController
 
     Unirest.timeout(5)
     5.times do
-      api_call = Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{@investment.ticker}/data.json?start_date=2006-01-01&column_index=6&order=asc&api_key=AVB8P1K72xSZsU2SyFZN").body
+      api_call = Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{@investment.ticker}/data.json?start_date=2006-01-01&column_index=6&order=asc&api_key=#{ENV['quandl_api_one']}").body
+
+
       if api_call["dataset_data"]
         @daily_prices = api_call["dataset_data"]["data"]
         render 'show.json.jbuilder'
@@ -17,10 +19,6 @@ class Api::V1::StockpricesController < ApplicationController
         puts "*" * 40
       end
     end
-
-
-    # api_call = Unirest.get("https://www.quandl.com/api/v3/datatables/WIKI/PRICES.json?date.gte=2000-01-01&date.lte=#{current_date}&ticker=#{@investment.ticker}&qopts.columns=date,adj_close&api_key=AVB8P1K72xSZsU2SyFZN").body
-    # @daily_prices = api_call["datatable"]["data"]
 
     render "show.json.jbuilder"
   end

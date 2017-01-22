@@ -46,7 +46,7 @@ class InvestmentsController < ApplicationController
 
     ticker = @investment.ticker
 
-    @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{ticker}").body
+    @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=#{ENV['barchart_api']}&symbols=#{ticker}").body
     @current_day = @barchart["results"][0]
 
     @name = @current_day["name"]
