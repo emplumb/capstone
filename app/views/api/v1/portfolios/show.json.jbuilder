@@ -1,7 +1,8 @@
 json.array! @portfolio.investment_portfolios.each do |investment_portfolio|
+  json.name @portfolio.name
+  json.portfolio_id @portfolio.id
   json.id investment_portfolio.id
   json.ticker investment_portfolio.ticker.upcase
-  json.portfolio_id investment_portfolio.portfolio_id
   json.investment_id investment_portfolio.investment_id
   json.purchase_price investment_portfolio.purchase_price
   json.purchase_date investment_portfolio.purchase_date
