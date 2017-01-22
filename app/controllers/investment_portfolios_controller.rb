@@ -1,6 +1,7 @@
 class InvestmentPortfoliosController < ApplicationController
 
   def index
+    gon.investmentPortfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
     if @investment_portfolios.length > 0
@@ -23,7 +24,7 @@ class InvestmentPortfoliosController < ApplicationController
 
       if params[:purchase_date] < Date.today.strftime("%Y-%m-%d")
 
-        input_date_call = Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{params[:ticker]}.json?start_date=#{params[:purchase_date]}&end_date=#{params[:purchase_date]}&api_key=AVB8P1K72xSZsU2SyFZN").body
+        input_date_call = Unirest.get("https://www.quandl.com/api/v3/datasets/YAHOO/#{params[:ticker]}.json?start_date=#{params[:purchase_date]}&end_date=#{params[:purchase_date]}&api_key=#{ENV['quandl_api_two']}").body
         input_date_price = input_date_call["dataset"]["data"][0][6]
 
         share_amount = params[:cost_basis].to_f / input_date_price.to_f

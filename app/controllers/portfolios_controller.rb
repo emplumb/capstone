@@ -4,15 +4,9 @@ class PortfoliosController < ApplicationController
     @portfolio = Portfolio.find(params[:id])
     @investment = Investment.find_by(ticker: params[:ticker])
     @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
+    @investments = Investment.all
 
-    @total_portfolio_cost = @investment_portfolios.sum(&:cost_basis)
-    @total_portfolio_value = @investment_portfolios.sum(&:current_value)
-    @total_gain_loss = @investment_portfolios.sum(&:gain_loss)
-
-    # @portfolio_month_return = @investment_portfolios.sum(&:weighted_month_return)
-    @portfolio_six_month_return = @investment_portfolios.sum(&:weighted_six_month_return)
-    @portfolio_ytd_return = @investment_portfolios.sum(&:weighted_ytd_return)
-    @inception_portfolio_return = (@total_gain_loss / @total_portfolio_cost)
+    gon.investmentPortfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
     # if current_user
     #     @portfolio = current_user.portfolios
@@ -23,7 +17,7 @@ class PortfoliosController < ApplicationController
 
     if params[:ticker]
         ticker = params[:ticker]
-        @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=a6ff075b20922ed334cf367cab045322&symbols=#{ticker}").body
+        @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=#{ENV['barchart_api']}&symbols=#{ticker}").body
 
         @current_day = @barchart["results"][0]
         @name = @current_day["name"]
@@ -33,14 +27,6 @@ class PortfoliosController < ApplicationController
         @open_price = @current_day["open"]
         @percent_change = @current_day["percentChange"]
     end
-
-    # @investment_portfolio = @portfolio.investment_portfolios.investment_id
-    # @port = Portfolio.where(name: "Zora93 Portfolio")
-
-    # @investment_portfolio = InvestmentPortfolio.where(portfolio_id: @portfolio.id, investment_id: @investment.id)
-    # @i = @investment_portfolio.investment_id
-
-
   end
 
   def new
