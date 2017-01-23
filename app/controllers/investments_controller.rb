@@ -6,19 +6,15 @@ class InvestmentsController < ApplicationController
     gon.investment = Investment.find_by(ticker: @ticker)
     @investment = Investment.find_by(ticker: @ticker)
 
-    @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=#{ENV['barchart_api']}&symbols=#{@ticker}").body
-    @current_day = @barchart["results"][0]
-
-    @name = @current_day["name"]
-    @symbol = @current_day["symbol"]
-    @date = @current_day["tradeTimestamp"]
-    @current_price = @current_day["lastPrice"]
-    @open_price = @current_day["open"]
-    @percent_change = @current_day["percentChange"]
-
     @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.quotes+where+symbol+in+('#{@ticker}')&format=json&env=store://datatables.org/alltableswithkeys&callback=").body
 
     @data = @yahoo["query"]["results"]["quote"]
+    @name = @data["Name"]
+    @symbol = @data["symbol"].upcase
+    @date = @data["LastTradeDate"]
+    @current_price = @data["LastTradePriceOnly"]
+    @open_price = @data["Open"]
+    @percent_change = @data["ChangeinPercent"]
 
     @one_year_low = @data["YearLow"]
     @one_year_high = @data["YearHigh"]

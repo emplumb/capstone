@@ -8,40 +8,33 @@
 
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
-<input style="width: 25%" type="text" ng-model="inputTicker">
-<button ng-click="searchTicker(inputTicker)">Find Stock</button>
+    <input style="width: 25%" type="text" ng-model="inputTicker">
+    <button ng-click="searchTicker(inputTicker)">Find Stock</button>
 
-
-    <div class="form-group">
-        <input style="width: 25%" type="text" name="content" class="form-control" ng-model="message.content">
-    </div>
-    <button class="btn btn-primary">Find stock</button>
-
-
-    <div class="stock">
-      <%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
+<!--     <div class="stock">
+      <!%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
         <div class="form-group" style="width: 25%">
-          <%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
+          <!%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
         </div>
         <div>
-          <%= submit_tag "Find stock", class: "btn btn-primary" %>
+          <!%= submit_tag "Find stock", class: "btn btn-primary" %>
         </div>
-      <% end %>
-    </div>
+      <!% end %>
+    </div> -->
 
     <% if params[:ticker] %>
       <div style="margin-top: 20px">
-        <h4><a href="/investments/<%= @investment.id %>">{{ name }}</a> ({{ symbol | uppercase }})</h4>
+        <h4><a href="/investments/<%= @investment.id %>">{{ name }}</a> {{ symbol | uppercase }}</h4>
       </div>
       <p>
         <table class="inv">
           <tr>
             <td>Current price: </td>
-            <td>{{ price }}</td>
+            <td>{{ price | currency : $ : 2  }}</td>
           </tr>
           <tr>
             <td>Open price: </td>
-            <td>{{ openPrice }}</td>
+            <td>{{ openPrice | currency : $ : 2  }}</td>
           </tr>
           <tr>
             <td>Day change:</td>
@@ -95,7 +88,7 @@
             <th>Remove</th>
           </tr>
           <tr ng-repeat="investmentPortfolio in investmentPortfolios | orderBy:orderAttribute:isOrderDescending">
-            <td class="text-center"><img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"></td>
+            <!-- <td class="text-center"><img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"></td> -->
             <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
             <td>{{ investmentPortfolio.purchase_date }}</td>
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
