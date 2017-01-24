@@ -1,4 +1,4 @@
-json.array! @portfolio.investment_portfolios.each do |investment_portfolio|
+json.array! @investment_portfolios.each do |investment_portfolio|
   json.name @portfolio.name
   json.portfolio_id @portfolio.id
   json.id investment_portfolio.id

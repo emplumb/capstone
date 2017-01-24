@@ -5,6 +5,11 @@ class Api::V1::InvestmentPortfoliosController < ApplicationController
     render "index.json.jbuilder"
   end
 
+  def show
+    @investment_portfolio = InvestmentPortfolio.find(params[:id])
+    render "show.json.jbuilder"
+  end
+
   def create
     @investment_portfolio = InvestmentPortfolio.new(
       investment_id: params[:investmentId],

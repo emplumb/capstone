@@ -62,8 +62,6 @@
           <!%= submit_tag "Add to portfolio", class: "btn btn-success" %>
         <!% end %> -->
 
-    <p><a href="/investment_portfolios">I_P's</a></p>
-
     <!-- performance table begins -->
     <h1 class="text-center">Summary</h1>
     <div class="panel panel-green margin-bottom-40">
@@ -102,8 +100,8 @@
             <td ng-class="{positive: investmentPortfolio.sixMonthReturn > 0, negative: investmentPortfolio.sixMonthReturn < 0}" class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
             <td ng-class="{positive: investmentPortfolio.sinceInception > 0, negative: investmentPortfolio.sinceInception < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
             <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
-            <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">0{{ investmentPortfolio.sharpe | number : 2 }}</td>
-            <td class="text-center">0{{ investmentPortfolio.correlation | number :2 }}</td>
+            <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
+            <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
             <td class="text-center"><%= link_to 'X', "/investment_portfolios/{{ investmentPortfolio.id }}", method: :delete, class:"btn btn-danger" %></td>
           </tr>
           <tr>
@@ -111,15 +109,15 @@
             <td><strong>Total</strong></td>
             <td class="text-center">-</td>
             <td>{{ getTotalCost() | currency : $ : 2 }}</td>
-            <td ng-class="{positive: totalGainLoss > 0, negative: totalGainLoss < 0}"  class="text-center">0{{ totalGainLoss | currency : $ : 2 }}</td>
-            <td class="text-center">0{{ totalCurrentValue | currency : $ : 2 }}</td>
+            <td ng-class="{positive: totalGainLoss > 0, negative: totalGainLoss < 0}"  class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
+            <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
             <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
             <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
             <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
             <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}%</td>
             <td class="text-center">{{ totalPortfolioRisk * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center">0{{ totalPortfolioSharpe - 1 | number : 2 }}</td>
-            <td class="text-center">0{{ totalPortfolioCorrelation - 1 | number : 2 }}</td>
+            <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center">{{ totalPortfolioSharpe - 1 | number : 2 }}</td>
+            <td class="text-center">{{ totalPortfolioCorrelation - 1 | number : 2 }}</td>
             <td class="text-center"></td>
           </tr>
         </table>

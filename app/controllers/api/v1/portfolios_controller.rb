@@ -7,7 +7,7 @@ class Api::V1::PortfoliosController < ApplicationController
 
   def show
     @portfolio = Portfolio.find(params[:id])
-    @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
+    @investment_portfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id).order(id: 'DESC')
     render "show.json.jbuilder"
   end
 
