@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/portfolios/new" => "portfolios#new"
   post "/portfolios" => "portfolios#create"
   get "/portfolios/:id" => "portfolios#show"
+  get "/portfolios/:id/edit" => "portfolios#edit"
+  patch "/portfolios/:id" => "portfolios#update"
   delete "/portfolios/:id" => "portfolios#destroy"
 
   get "/signup" => "users#new"
@@ -26,9 +28,11 @@ Rails.application.routes.draw do
       get "/portfolios" => "portfolios#index"
       get "/portfolios/:id" => "portfolios#show"
 
+      get "/investments" => "investments#index"
+      get "/investments/:id" => "investments#show"
+
       get "/investment_portfolios/" => "investment_portfolios#index"
       post "/investment_portfolios/" => "investment_portfolios#create"
-      delete "/investment_portfolios/:id" => "investment_portfolios#destroy"
 
       get "/stockprices/:id" => "stockprices#show"
     end

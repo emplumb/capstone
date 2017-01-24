@@ -8,7 +8,6 @@ json.array! @investment_portfolios.each do |investment_portfolio|
   json.purchase_price investment_portfolio.purchase_price
   json.shares investment_portfolio.cost_basis
   json.shares investment_portfolio.shares
-  json.alpha investment_portfolio.alpha
   json.standard_deviation investment_portfolio.standard_deviation
   json.sharpe investment_portfolio.sharpe
   json.correlation investment_portfolio.correlation
