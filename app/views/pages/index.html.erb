@@ -32,6 +32,7 @@
 <% end %>
 
 <!-- <div id="single-series-home" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
+
 <div ng-app="app">
   <div ng-controller="homepageCtrl" ng-init="setup()">
     <!-- performance table begins -->
@@ -52,13 +53,13 @@
             <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
           </tr>
           <tr ng-repeat="portfolio in portfolios | orderBy:orderAttribute:isOrderDescending"">
-            <td>{{ portfolio.name }}</td>
-            <td class="text-center">2%</td>
-            <td class="text-center">8%</td>
-            <td class="text-center">30%</td>
-            <td class="text-center">16.1%</td>
-            <td class="text-center">.40</td>
-            <td class="text-center">.72</td>
+            <td><a href="/portfolios/{{ portfolio.id }}">{{ portfolio.name }}</a></td>
+            <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center" class="text-center">0<!-- {{ weightedYtdReturn * 100 | number : 2 }} -->%</td>
+            <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center" class="text-center">0<!-- {{ weightedSixMonthReturn * 100 | number : 2 }} -->%</td>
+            <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center" class="text-center">0<!-- {{ weightedSinceInceptionReturn * 100 | number : 2 }} -->%</td>
+            <td class="text-center">0<!-- {{ totalPortfolioRisk * 100 | number : 2 }} -->%</td>
+            <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center" class="text-center">0<!-- {{ totalPortfolioSharpe | number : 2 }} --></td>
+            <td class="text-center">0<!-- {{ totalPortfolioCorrelation | number : 2 }} --></td>
           </tr>
 
         </table>
