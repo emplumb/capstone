@@ -19,9 +19,9 @@ class Api::V1::InvestmentPortfoliosController < ApplicationController
       correlation: params[:correlation]
     )
     if @investment_portfolio.save
-      render "index.json.jbuilder"
+      render "show.json.jbuilder"
     else
-      render json: { errors: "Peter Jang broke it" }
+      render json: { errors: "Evan broke it" }
     end
   end
 
