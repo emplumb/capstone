@@ -8,9 +8,6 @@
 
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
-    <input style="width: 25%" type="text" placeholder="Search by symbol" ng-model="inputTicker">
-    <button ng-click="showTicker=true; searchTicker(inputTicker)">Find Stock</button>
-
 <!--     <div class="stock">
       <!%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
         <div class="form-group" style="width: 25%">
@@ -22,8 +19,10 @@
       <!% end %>
     </div> -->
 
+    <input style="width: 25%" type="text" placeholder="Search by symbol" ng-model="inputTicker">
+    <button ng-click="showTicker=true; searchTicker(inputTicker)">Find Stock</button>
+
     <div ng-show="showTicker">
-    <!-- <div ng-if="inputTicker"> -->
       <div style="margin-top: 20px">
         <h4><a href="/investments/{{ investmentId }}">{{ name }}</a></h4>
         <h4>{{ symbol | uppercase }}</h4>
@@ -45,8 +44,14 @@
         </table>
       </p>
       <div style="margin-bottom: 30px">
-        <!%= form_tag "/investment_portfolios", method: :post do %>
-          <!%= hidden_field_tag :investment_id, {{ investmentId }} %>
+        <input style="width: 25%" type="text" placeholder="Please enter dollar amount" ng-model="inputDollarAmount">
+        <button ng-click="addInvestment(inputDollarAmount)">Add to portfolio</button>
+      </div>
+    </div>
+
+
+<!--         <!%= form_tag "/investment_portfolios", method: :post do %>
+          <!%= hidden_field_tag :investment_id, 2 %>
           <!%= hidden_field_tag :portfolio_id, @portfolio.id %>
           <!%= hidden_field_tag :ticker, params[:ticker] %>
           <!%= hidden_field_tag :purchase_price, @current_price %>
@@ -54,14 +59,8 @@
             Dollar amount:
             <!%= text_field_tag :cost_basis %>
           </div>
-          <div>
-            Date purchased:
-            <!%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
-          </div>
-        <!%= submit_tag "Add to portfolio", class: "btn btn-success" %>
-        <!% end %>
-      </div>
-    </div>
+          <!%= submit_tag "Add to portfolio", class: "btn btn-success" %>
+        <!% end %> -->
 
     <p><a href="/investment_portfolios">I_P's</a></p>
 
