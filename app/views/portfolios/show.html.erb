@@ -3,9 +3,9 @@
     <h1><%= @portfolio.name %></h1>
     <a href="/investments">Investments Index</a>
 
-    <h2><a href="/investments/84">GE</a> </h2>
-
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
+    <!-- <div class="port-chart-padding" id="single-series-home"></div> -->
+
 
     <input style="width: 25%" type="text" placeholder="Search by symbol" ng-model="inputTicker">
     <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)">Find Stock</button>
@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <td>Day change:</td>
-            <td>{{ percentChange }}</td>
+            <td ng-class="{positive: percentChange > 0, negative: percentChange < 0}">{{ percentChange }}%</td>
           </tr>
         </table>
       </p>
@@ -77,8 +77,16 @@
             <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
             <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
             <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
-            <td class="text-center"><%= link_to 'X', "/investment_portfolios/{{ investmentPortfolio.id }}", method: :delete, class:"btn btn-danger" %></td>
+            <td class="text-center">
+              <%= link_to("/investment_portfolios/{{ investmentPortfolio.id }}", method: :delete) do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </td>
           </tr>
+  <!--         <span class="item">
+                      <i class="fa fa-trash"></i>
+                      &nbsp;fa-trash
+                    </span> -->
           <tr>
           <td></td>
             <td><strong>Total</strong></td>
