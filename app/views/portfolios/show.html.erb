@@ -1,4 +1,3 @@
-
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
     <h1><%= @portfolio.name %></h1>
@@ -7,17 +6,6 @@
     <h2><a href="/investments/84">GE</a> </h2>
 
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
-
-<!--     <div class="stock">
-      <!%= form_tag "/portfolios/#{@portfolio.id}", method: :get do %>
-        <div class="form-group" style="width: 25%">
-          <!%= text_field_tag :ticker, params[:ticker], class: 'form-control' %>
-        </div>
-        <div>
-          <!%= submit_tag "Find stock", class: "btn btn-primary" %>
-        </div>
-      <!% end %>
-    </div> -->
 
     <input style="width: 25%" type="text" placeholder="Search by symbol" ng-model="inputTicker">
     <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)">Find Stock</button>
@@ -48,19 +36,6 @@
         <button ng-click="addInvestment(inputDollarAmount)">Add to portfolio</button>
       </div>
     </div>
-
-
-<!--         <!%= form_tag "/investment_portfolios", method: :post do %>
-          <!%= hidden_field_tag :investment_id, 2 %>
-          <!%= hidden_field_tag :portfolio_id, @portfolio.id %>
-          <!%= hidden_field_tag :ticker, params[:ticker] %>
-          <!%= hidden_field_tag :purchase_price, @current_price %>
-          <div>
-            Dollar amount:
-            <!%= text_field_tag :cost_basis %>
-          </div>
-          <!%= submit_tag "Add to portfolio", class: "btn btn-success" %>
-        <!% end %> -->
 
     <!-- performance table begins -->
     <h1 class="text-center">Summary</h1>
