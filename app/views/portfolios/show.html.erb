@@ -20,9 +20,9 @@
     </div> -->
 
     <input style="width: 25%" type="text" placeholder="Search by symbol" ng-model="inputTicker">
-    <button ng-click="showTicker=true; searchTicker(inputTicker)">Find Stock</button>
+    <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)">Find Stock</button>
 
-    <div ng-show="showTicker">
+    <div ng-show="showCurrentInfo">
       <div style="margin-top: 20px">
         <h4><a href="/investments/{{ investmentId }}">{{ name }}</a></h4>
         <h4>{{ symbol | uppercase }}</h4>
@@ -87,7 +87,7 @@
             <th>Remove</th>
           </tr>
           <tr ng-repeat="investmentPortfolio in investmentPortfolios | orderBy:orderAttribute:isOrderDescending">
-            <td class="text-center"><img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"></td>
+            <td class="text-center">a<!-- <img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"> --></td>
             <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
             <td>{{ investmentPortfolio.purchase_date }}</td>
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>

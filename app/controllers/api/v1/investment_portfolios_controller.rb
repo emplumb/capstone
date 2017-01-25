@@ -1,7 +1,7 @@
 class Api::V1::InvestmentPortfoliosController < ApplicationController
 
   def index
-    @investment_portfolios = InvestmentPortfolio.order(portfolio_id: 'DESC')
+    @investment_portfolios = InvestmentPortfolio.all
     render "index.json.jbuilder"
   end
 
@@ -11,8 +11,10 @@ class Api::V1::InvestmentPortfoliosController < ApplicationController
   end
 
   def create
+    investment = Investment.find_by(ticker: params[:ticker])
     @investment_portfolio = InvestmentPortfolio.new(
-      investment_id: params[:investmentId],
+      investment_id: investment.id,
+      # investment_id: params[:investmentId],
       portfolio_id: params[:portfolioId],
       cost_basis: params[:costBasis],
       ticker: params[:ticker],
