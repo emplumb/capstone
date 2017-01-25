@@ -3,14 +3,13 @@ class InvestmentsController < ApplicationController
   def index
     @ticker = params[:ticker] || "aapl"
 
-    gon.investment = Investment.find_by(ticker: @ticker)
     @investment = Investment.find_by(ticker: @ticker)
 
     @yahoo = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.quotes+where+symbol+in+('#{@ticker}')&format=json&env=store://datatables.org/alltableswithkeys&callback=").body
 
     @data = @yahoo["query"]["results"]["quote"]
     @name = @data["Name"]
-    @symbol = @data["symbol"].upcase
+    @ticker = @data["symbol"].upcase
     @date = @data["LastTradeDate"]
     @current_price = @data["LastTradePriceOnly"]
     @open_price = @data["Open"]
