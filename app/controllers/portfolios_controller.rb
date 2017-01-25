@@ -8,24 +8,11 @@ class PortfoliosController < ApplicationController
 
     gon.investmentPortfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
-    # if current_user
-    #     @portfolio = current_user.portfolios
-    #     render "show.html.erb"
-    # else
-    #     redirect_to "/"
-    # end
-
-    if params[:ticker]
-        ticker = params[:ticker]
-        @barchart = Unirest.get("http://marketdata.websol.barchart.com/getQuote.json?key=#{ENV['barchart_api']}&symbols=#{ticker}").body
-
-        @current_day = @barchart["results"][0]
-        @name = @current_day["name"]
-        @symbol = @current_day["symbol"]
-        @date = @current_day["tradeTimestamp"]
-        @current_price = @current_day["lastPrice"]
-        @open_price = @current_day["open"]
-        @percent_change = @current_day["percentChange"]
+    if current_user
+        @portfolio = current_user.portfolios
+        render "show.html.erb"
+    else
+        redirect_to "/"
     end
   end
 
