@@ -9,7 +9,7 @@ class PortfoliosController < ApplicationController
     gon.investmentPortfolios = InvestmentPortfolio.where(portfolio_id: current_user.portfolios.first.id)
 
     if current_user
-        @portfolio = current_user.portfolios
+        @portfolio = current_user.portfolios.first
         render "show.html.erb"
     else
         redirect_to "/"
