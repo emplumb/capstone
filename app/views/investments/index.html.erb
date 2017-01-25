@@ -5,101 +5,124 @@
     margin-right: 20px;
   }
 </style>
-
-<%= form_tag "/investments", method: :get do %>
-  <div>
-    <%= text_field_tag :ticker %>
-    <%= submit_tag "Find stock" %>
-  </div>
-<% end %>
-
-<h2><a href="#"><%= @name %></a></h2>
-<h4><%= @symbol %></h4>
-<div><%= @time %></div>
-<p><%= @date %></p>
-<p>
-  <table class="table table-hover">
-    <tbody>
-      <tr>
-        <td>Current price</td>
-        <td><%= number_to_currency(@current_price) %></td>
-      </tr>
-      <tr>
-        <td>Open Price</td>
-        <td><%= number_to_currency(@open_price) %></td>
-      </tr>
-      <tr>
-        <td>Day Change</td>
-        <td><%= @percent_change %></td>
-      </tr>
-      <tr>
-        <td>1yr Year Low</td>
-        <td><%= number_to_currency(@one_year_low) %></td>
-      </tr>
-      <tr>
-        <td>1yr Year High</td>
-        <td><%= number_to_currency(@one_year_high) %></td>
-      </tr>
-      <tr>
-        <td>50 day MA</td>
-        <td><%= number_to_currency(@fifty_ma) %></td>
-      </tr>
-      <tr>
-        <td>200 day MA</td>
-        <td><%= number_to_currency(@two_hundred_ma) %></td>
-      </tr>
-    </tbody>
-  </table>
-  <table class="table table-hover">
-    <tbody>
-      <tr>
-        <td>Yield</td>
-        <td><%= @yield %>%</td>
-      </tr>
-      <tr>
-        <td>Ex-Div Date</td>
-        <td><%= @ex_div_date %></td>
-      </tr>
-      <tr>
-        <td>PE (TTM)</td>
-        <td><%= @price_earnings %></td>
-      </tr>
-      <tr>
-        <td>PS (TTM)</td>
-        <td><%= @price_sales %></td>
-      </tr>
-      <tr>
-        <td>EPS (TTM)</td>
-        <td><%= number_to_currency(@eps) %></td>
-      </tr>
-      <tr>
-        <td>EPS Q1 Estimate</td>
-        <td><%= number_to_currency(@eps_quarter_estimate) %></td>
-      </tr>
-      <tr>
-        <td>EPS 2016 Estimate</td>
-        <td><%= number_to_currency(@eps_year_estimate) %></td>
-      </tr>
-    </tbody>
-  </table>
-</p>
-
-<div style="clear: both">
-  <%= form_tag "/investment_portfolios", method: :post do %>
-    <%= hidden_field_tag :investment_id, @investment.id %>
-    <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
-    <%= hidden_field_tag :ticker, @ticker %>
-    <%= hidden_field_tag :purchase_price, @current_price %>
-    <div>
-      Dollar amount:
-      <%= text_field_tag :cost_basis %>
-    </div>
-    <div>
-      Date purchased:
-      <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
-    </div>
-    <p></p>
-    <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
+<div id="inv-bottom-pad">
+  <%= form_tag "/investments", method: :get, class: "form-inline" do %>
+    <%= text_field_tag :ticker, "", placeholder: "Search by symbol", class: "form-control" %>
+    <%= button_tag "Find stock", class: "btn btn-primary" %>
   <% end %>
 </div>
 
+<div id="investment-table-pad">
+  <div class="row">
+    <div class="col-sm-3">
+      <h2 id="inv-name-pad"><a href="#"><%= @name %></a> (<%= @ticker %>)</h2>
+    </div>
+    <div class="col-sm-2">
+      <img id="logo-show" src="<%= @investment.logo %>">
+    </div>
+  </div>
+  <p><%= @date %></p>
+  <p>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td>Current price</td>
+          <td><%= @current_price %></td>
+        </tr>
+        <tr>
+          <td>Open Price</td>
+          <td><%= @open_price %></td>
+        </tr>
+        <tr>
+          <td>Day Change</td>
+          <td><%= @percent_change %></td>
+        </tr>
+        <tr>
+          <td>1yr Year Low</td>
+          <td><%= number_to_currency(@one_year_low) %></td>
+        </tr>
+        <tr>
+          <td>1yr Year High</td>
+          <td><%= number_to_currency(@one_year_high) %></td>
+        </tr>
+        <tr>
+          <td>50 day MA</td>
+          <td><%= number_to_currency(@fifty_ma) %></td>
+        </tr>
+        <tr>
+          <td>200 day MA</td>
+          <td><%= number_to_currency(@two_hundred_ma) %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td>Yield</td>
+          <% if @yield %>
+            <td><%= number_with_precision(@yield, precision: 2) %>%</td>
+          <% else %>
+            <td>N/A</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Ex-Div Date</td>
+          <% if @ex_div_date %>
+            <td><%= @ex_div_date %></td>
+          <% else %>
+            <td>N/A</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>PE (TTM)</td>
+          <% if @price_earnings %>
+            <td><%= @price_earnings %></td>
+          <% else %>
+            <td>N/A</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>PS (TTM)</td>
+          <td><%= @price_sales %></td>
+        </tr>
+        <tr>
+          <td>EPS (TTM)</td>
+          <td><%= number_to_currency(@eps) %></td>
+        </tr>
+        <tr>
+          <td>EPS Q1 Estimate</td>
+          <td><%= number_to_currency(@eps_quarter_estimate) %></td>
+        </tr>
+        <tr>
+          <td>EPS 2016 Estimate</td>
+          <td><%= number_to_currency(@eps_year_estimate) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </p>
+</div>
+
+<div>
+  <%= form_tag "/investment_portfolios", method: :post, class: "sky-form" do %>
+    <%= hidden_field_tag :investment_id, @investment.id %>
+    <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
+    <%= hidden_field_tag :ticker, @investment.ticker %>
+    <%= hidden_field_tag :purchase_price, @current_price %>
+    <header>Add Investment To Your Portfolio</header>
+    <fieldset>
+      <section class="col col-4">
+        <label class="label">Amount Purchased ($)</label>
+        <label class="input">
+          <%= text_field_tag :cost_basis, '', class: "input" %>
+        </label>
+        <label class="label">Date Purchased</label>
+        <label class="input">
+          <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d"))  %>
+        </label>
+      </section>
+    </fieldset>
+    <footer>
+      <%= submit_tag "Submit", class: "btn-u" %>
+    </footer>
+  <% end %>
+</div>
