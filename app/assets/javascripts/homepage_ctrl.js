@@ -4,8 +4,6 @@
   angular.module("app").controller("homepageCtrl", function($scope, $http) {
 
     $scope.setup = function() {
-      $scope.orderAttribute = 'name';
-      $scope.isOrderDescending = false;
 
       $http.get("/api/v1/portfolios/").then(function(response) {
         console.log(response.data);
@@ -21,6 +19,8 @@
         });
       });
     };
+    // $scope.orderAttribute = portfolio.ytdReturn;
+    // $scope.isOrderDescending = false;
 
     $scope.changeOrderAttribute = function(inputAttribute) {
       if (inputAttribute === $scope.orderAttribute) {

@@ -1,11 +1,11 @@
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
     <hr>
-    <h2 class="h-style"><strong><%= @portfolio.name.upcase %></strong></h2>
+    <h2 class="h-style aqua"><strong><%= @portfolio.name.upcase %></strong></h2>
     <hr class="devider devider-dotted">
 
     <div class="col-md-4 link-effects">
-      <div class="tag-box tag-box-v3">
+      <div class="tag-box">
         <div class="headline"><h2 class="heading-sm">Intraday Prices</h2></div>
         <p>
           <div>
@@ -53,7 +53,6 @@
     <div class="port-chart-padding margin-bottom" id="single-series-home"></div>
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
-    <hr>
     <div class="panel panel-green margin-bottom-40">
       <div class="panel-heading">
         <div class="panel-title"><i class="fa fa-user"></i><h1 class="p-title text-center">Portfolio Summary</h1></div>
