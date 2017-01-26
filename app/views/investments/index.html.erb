@@ -27,11 +27,11 @@
       <tbody>
         <tr>
           <td>Current price</td>
-          <td><%= @current_price %></td>
+          <td><%= number_to_currency(@current_price) %></td>
         </tr>
         <tr>
           <td>Open Price</td>
-          <td><%= @open_price %></td>
+          <td><%= number_to_currency(@open_price) %></td>
         </tr>
         <tr>
           <td>Day Change</td>
