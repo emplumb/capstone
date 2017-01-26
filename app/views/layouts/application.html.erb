@@ -39,6 +39,9 @@
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
+    <link rel="stylesheet" href="/assets/plugins/ladda-buttons/css/custom-lada-btn.css">
+    <link rel="stylesheet" href="/assets/plugins/hover-effects/css/custom-hover-effects.css">
+
     <!-- CSS Theme -->
     <link rel="stylesheet" href="/assets/css/theme-colors/aqua.css" id="style_color">
     <link rel="stylesheet" href="/assets/css/theme-skins/dark.css">
@@ -85,23 +88,10 @@
               <div class="menu-container">
                 <ul class="nav navbar-nav">
                   <!-- Investments -->
-                  <li class="dropdown active">
-                    <a href="/investments" class="dropdown-toggle" data-toggle="dropdown">
+                  <li>
+                    <a href="/investments">
                       Investments
                     </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="/index.html">Option 1: Default Page</a></li>
-                      <li class="dropdown-submenu">
-                        <a href="/javascript:void(0);">Option 2: One Page</a>
-                        <ul class="dropdown-menu">
-                          <li><a target="_blank" href="/One-Pages/Classic/index.html">- One Page Template</a></li>
-                          <li><a target="_blank" href="/One-Pages/Classic/one_page_dark.html">- One Page Dark Option</a></li>
-                          <li><a target="_blank" href="/One-Pages/Classic/one_page_home1.html">- One Page Option 1</a></li>
-                          <li><a target="_blank" href="/One-Pages/Classic/one_page_home2.html">- One Page Option 2</a></li>
-                          <li><a target="_blank" href="/One-Pages/Classic/one_page_home3.html">- One Page Option 3</a></li>
-                        </ul>
-                      </li>
-                    </ul>
                   </li>
                   <li class="dropdown">
                     <a href="/javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
@@ -110,12 +100,13 @@
                   </li>
 
                   <% if current_user %>
+                    <li><a href="/portfolios/<%= current_user.portfolios.first.id %>">My Portfolio</a></li>
                     <li class="dropdown">
                       <a href="/javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         <%= current_user.username %>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a href="/portfolios/<%= current_user.portfolios.first.id %>">My Portfolio</a></li>
+                        <li><a href="#">Settings</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/logout">Logout</a></li>
                       </ul>
@@ -151,12 +142,15 @@
               <div class="col-md-6">
                 <p>
                   2017 &copy; All Rights Reserved.
+                  <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
     </div><!--/wrapper-->
 
     <!-- Highcharts -->
