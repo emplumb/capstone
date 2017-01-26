@@ -1,18 +1,29 @@
-// .port-chart-padding {
-//   margin-left: 500px;
-// }
+hr {
+  width: 100%
+}
+
+.h-style {
+  margin-left: 15px;
+  color: #FF4C4C;
+}
+
+.port-chart-padding {
+  float: left;
+  // margin-top: 60px;
+}
 
 #single-series-home {
   height: 400px;
   min-width: 760px;
 }
 
-.fa-trash {
-  color: red;
+.p-title {
+  font-size: 30px!important;
+  color: white;
 }
 
-hr {
-  width: 35%
+.fa-trash {
+  color: red;
 }
 
 .borderless td, .borderless th {
@@ -20,5 +31,10 @@ hr {
 }
 
 .margin-top {
-  margin-top: 500px;
+  clear: both;
+  // margin-top: 300px;
+}
+
+.margin-bottom {
+  margin-bottom: 30px;
 }

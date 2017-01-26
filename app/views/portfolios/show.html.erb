@@ -1,101 +1,62 @@
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
-    <div class="headline"><h1><strong><%= @portfolio.name %></strong></h1></div>
+    <hr>
+    <h2 class="h-style"><strong><%= @portfolio.name.upcase %></strong></h2>
+    <hr class="devider devider-dotted">
 
-
-    <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
-
-    <div class="row">
-      <div class="col-md-4 link-effects">
-          <!-- Hover Effect -->
-          <div class="tag-box tag-box-v3">
-            <div class="headline"><h2 class="heading-sm">Intraday Prices</h2></div>
-            <p>
-              <div>
-                <form class="form-inline">
-                  <input type="text" placeholder="Search by symbol" ng-model="inputTicker", class="form-control">
-                  <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)", class="btn btn-primary">Find Stock</button>
-                </form>
-              </div>
-            </p>
-            <br>
-            <div ng-show="showCurrentInfo">
-              <div style="margin-top: 20px">
-                <form class="sky-form">
-                  <header><a rel="grow" class="grow" href="/investments">{{ name }}</a></header>
-                  <fieldset>
-                      <table class="borderless table">
-                        <tbody>
-                          <tr>
-                            <td>Current price: </td>
-                            <td>{{ price | currency : $ : 2  }}</td>
-                          </tr>
-                          <tr>
-                            <td>Open price: </td>
-                            <td>{{ openPrice | currency : $ : 2  }}</td>
-                          </tr>
-                          <tr>
-                            <td>Day change:</td>
-                            <td ng-class="{positive: percentChange > 0, negative: percentChange < 0}">{{ percentChange }}%</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <label class="input">
-                        <input type="text" placeholder="Dollar amount" ng-model="inputDollarAmount", class="form-control">
-                      </label>
-                  </fieldset>
-                  <footer style="margin-top: 20px">
-                    <button ng-click="addInvestment(inputDollarAmount)", class="btn-u">Add to portfolio</button>
-                  </footer>
-                </form>
-              </div>
-            </div>
+    <div class="col-md-4 link-effects">
+      <div class="tag-box tag-box-v3">
+        <div class="headline"><h2 class="heading-sm">Intraday Prices</h2></div>
+        <p>
+          <div>
+            <form class="form-inline">
+              <input type="text" placeholder="Search by symbol" ng-model="inputTicker", class="form-control">
+              <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)", class="btn btn-primary">Find Stock</button>
+            </form>
           </div>
-      </div>
-      <div class="col-md-offset-3 col-md-5"></div>
-        <div  style="float: left" class="port-chart-padding" id="single-series-home"></div>
+        </p>
+        <br>
+        <div ng-show="showCurrentInfo">
+          <div style="margin-top: 20px">
+            <form class="sky-form">
+              <header><a rel="grow" class="grow" href="/investments">{{ name }}</a></header>
+              <fieldset>
+                  <table class="borderless table">
+                    <tbody>
+                      <tr>
+                        <td>Current price: </td>
+                        <td>{{ price | currency : $ : 2  }}</td>
+                      </tr>
+                      <tr>
+                        <td>Open price: </td>
+                        <td>{{ openPrice | currency : $ : 2  }}</td>
+                      </tr>
+                      <tr>
+                        <td>Day change:</td>
+                        <td ng-class="{positive: percentChange > 0, negative: percentChange < 0}">{{ percentChange }}%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <label class="input">
+                    <input type="text" placeholder="Dollar amount" ng-model="inputDollarAmount", class="form-control">
+                  </label>
+              </fieldset>
+              <footer style="margin-top: 20px">
+                <button ng-click="addInvestment(inputDollarAmount)", class="btn-u">Add to portfolio</button>
+              </footer>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-<!--     <h4>Get Intraday</h4>
-    <div>
-      <form class="form-inline">
-        <input style="width: 15%" type="text" placeholder="Search by symbol" ng-model="inputTicker", class="form-control">
-        <button ng-click="showCurrentInfo=true; searchTicker(inputTicker)", class="btn btn-primary">Find Stock</button>
-      </form>
-    </div> -->
-<!--     <div ng-show="showCurrentInfo">
-      <div style="margin-top: 20px">
-        <h3><a rel="grow" class="grow" href="/investments">{{ name }}</a></h3>
-      </div>
-      <p>
-        <table class="inv">
-          <tr>
-            <td>Current price: </td>
-            <td>{{ price | currency : $ : 2  }}</td>
-          </tr>
-          <tr>
-            <td>Open price: </td>
-            <td>{{ openPrice | currency : $ : 2  }}</td>
-          </tr>
-          <tr>
-            <td>Day change:</td>
-            <td ng-class="{positive: percentChange > 0, negative: percentChange < 0}">{{ percentChange }}%</td>
-          </tr>
-        </table>
-      </p>
-      <div style="margin-bottom: 30px">
-        <form>
-          <input style="width: 15%" type="text" placeholder="Dollar amount" ng-model="inputDollarAmount", class="form-control">
-          <button ng-click="addInvestment(inputDollarAmount)", class="btn btn-primary">Add to portfolio</button>
-        </form>
-      </div>
-    </div> -->
+    <div class="col-md-offset-3 col-md-5"></div>
+    <div class="port-chart-padding margin-bottom" id="single-series-home"></div>
+    <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
-    <!-- performance table begins -->
-    <h1 class="text-center">Summary</h1>
-    <div class="panel panel-green margin-bottom-40 margin-top">
+    <hr>
+    <div class="panel panel-green margin-bottom-40">
       <div class="panel-heading">
-        <i class="fa fa-user"></i>
+        <div class="panel-title"><i class="fa fa-user"></i><h1 class="p-title text-center">Portfolio Summary</h1></div>
       </div>
       <div class="panel-body">
         <table class="table table-hover table-striped">
@@ -122,9 +83,7 @@
             <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
             <td ng-class="{positive: investmentPortfolio.gainLoss > 0, negative: investmentPortfolio.gainLoss < 0}" class="text-center">0{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
             <td class="text-center">0{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
-
             <td class="text-center">{{ investmentPortfolio.weighting * 100 | number : 2 }}%</td>
-
             <td ng-class="{positive: investmentPortfolio.ytdReturn > 0, negative: investmentPortfolio.ytdReturn < 0}" class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number : 2  }}%</td>
             <td ng-class="{positive: investmentPortfolio.sixMonthReturn > 0, negative: investmentPortfolio.sixMonthReturn < 0}" class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
             <td ng-class="{positive: investmentPortfolio.sinceInception > 0, negative: investmentPortfolio.sinceInception < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
@@ -137,10 +96,6 @@
               <% end %>
             </td>
           </tr>
-  <!--         <span class="item">
-                      <i class="fa fa-trash"></i>
-                      &nbsp;fa-trash
-                    </span> -->
           <tr>
           <td></td>
             <td><strong>Total</strong></td>
@@ -159,8 +114,7 @@
           </tr>
         </table>
       </div>
-    </div><!-- performance table ends -->
-
+    </div>
   </div>
 </div>
 
