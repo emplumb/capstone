@@ -111,13 +111,13 @@
     <header>Add Investment To Your Portfolio</header>
     <fieldset>
       <section class="col col-4">
-        <label class="label">Amount Purchased ($)</label>
+
         <label class="input">
-          <%= text_field_tag :cost_basis, '', class: "input" %>
+          Amount Purchased ($) <%= text_field_tag :cost_basis, '', class: "input" %>
         </label>
-        <label class="label">Date Purchased</label>
-        <label class="input">
-          <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d"))  %>
+
+        <label class="input" style="margin-top: 30px">
+          Date Purchased <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d"))  %>
         </label>
       </section>
     </fieldset>
