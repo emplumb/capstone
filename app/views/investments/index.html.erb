@@ -5,7 +5,7 @@
     margin-right: 20px;
   }
 </style>
-<div id="inv-bottom-pad">
+<div id="inv-bottom-pad" class="search-top-pad">
   <%= form_tag "/investments", method: :get, class: "form-inline" do %>
     <%= text_field_tag :ticker, "", placeholder: "Search by symbol", class: "form-control" %>
     <%= button_tag "Find stock", class: "btn btn-primary" %>
