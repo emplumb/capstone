@@ -1,13 +1,24 @@
-.port-chart-padding {
-  margin-left: 500px;
-}
+// .port-chart-padding {
+//   margin-left: 500px;
+// }
 
 #single-series-home {
   height: 400px;
-  min-width: 310px;
-  max-width: 600px;
+  min-width: 760px;
 }
 
 .fa-trash {
   color: red;
+}
+
+hr {
+  width: 35%
+}
+
+.borderless td, .borderless th {
+    border: none!important;
+}
+
+.margin-top {
+  margin-top: 500px;
 }
