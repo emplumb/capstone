@@ -1,7 +1,7 @@
 class InvestmentsController < ApplicationController
 
   def index
-    @ticker = params[:ticker] || "aapl"
+    @ticker = params[:ticker] || "amzn"
 
     @investment = Investment.find_by(ticker: @ticker)
 
