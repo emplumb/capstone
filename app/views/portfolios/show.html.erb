@@ -1,9 +1,75 @@
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
-    <hr>
-    <h2 class="h-style aqua"><strong><%= @portfolio.name.upcase %></strong></h2>
-    <hr class="devider devider-dotted">
+    <div class="breadcrumbs">
+      <div class="container" id="portfolio-name">
+        <h1 class="pull-left"><div class="aqua"><%= @portfolio.name.upcase %></div></h1>
+      </div>
+    </div>
 
+    <div class="panel panel-green margin-bottom-40" id="port-margin-top">
+      <div class="panel-heading">
+        <div class="panel-title"><i class="fa fa-user"></i><h1 class="p-title text-center">Portfolio Summary</h1></div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-striped">
+          <tr>
+            <th></th>
+            <th ng-click="changeOrderAttribute('ticker')">Investments</th>
+            <th ng-click="changeOrderAttribute('purchase_date')">Purchase Date</th>
+            <th ng-click="changeOrderAttribute('cost_basis')">Cost</th>
+            <th ng-click="changeOrderAttribute('gainLoss')" class="text-center">G/L</th>
+            <th ng-click="changeOrderAttribute('currentValue')" class="text-center">MV</th>
+            <th ng-click="changeOrderAttribute('weighting')" class="text-center">Weighting</th>
+            <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
+            <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
+            <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">SI Return</th>
+            <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
+            <th ng-click="changeOrderAttribute('sharpe')" class="text-center">RA Return</th>
+            <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
+            <th>Remove</th>
+          </tr>
+          <tr ng-repeat="investmentPortfolio in investmentPortfolios | orderBy:orderAttribute:isOrderDescending">
+            <td class="text-center"><img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"></td>
+            <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
+            <td>{{ investmentPortfolio.purchase_date }}</td>
+            <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
+            <td ng-class="{positive: investmentPortfolio.gainLoss > 0, negative: investmentPortfolio.gainLoss < 0}" class="text-center">0{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
+            <td class="text-center">0{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
+            <td class="text-center">{{ investmentPortfolio.weighting * 100 | number : 2 }}%</td>
+            <td ng-class="{positive: investmentPortfolio.ytdReturn > 0, negative: investmentPortfolio.ytdReturn < 0}" class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number : 2  }}%</td>
+            <td ng-class="{positive: investmentPortfolio.sixMonthReturn > 0, negative: investmentPortfolio.sixMonthReturn < 0}" class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
+            <td ng-class="{positive: investmentPortfolio.sinceInception > 0, negative: investmentPortfolio.sinceInception < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
+            <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
+            <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
+            <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
+            <td class="text-center">
+              <%= link_to("/investment_portfolios/{{ investmentPortfolio.id }}", method: :delete) do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+          <td></td>
+            <td><strong>Total</strong></td>
+            <td class="text-center">-</td>
+            <td>{{ getTotalCost() | currency : $ : 2 }}</td>
+            <td ng-class="{positive: totalGainLoss > 0, negative: totalGainLoss < 0}"  class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
+            <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
+            <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
+            <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
+            <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
+            <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}%</td>
+            <td class="text-center">{{ totalPortfolioRisk * 100 | number : 2 }}%</td>
+            <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center">{{ totalPortfolioSharpe - 1 | number : 2 }}</td>
+            <td class="text-center">{{ totalPortfolioCorrelation - 1 | number : 2 }}</td>
+            <td class="text-center"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-offset-3 col-md-5"></div>
+    <div class="port-chart-padding margin-bottom" id="single-series-home"></div>
     <div class="col-md-4 link-effects">
       <div class="tag-box">
         <div class="headline"><h2 class="heading-sm">Intraday Prices</h2></div>
@@ -49,75 +115,12 @@
         </div>
       </div>
     </div>
-    <div class="col-md-offset-3 col-md-5"></div>
-    <div class="port-chart-padding margin-bottom" id="single-series-home"></div>
     <!-- <div id="comparison-series" style="height: 400px; min-width: 310px; max-width: 700px"></div> -->
 
-    <div class="panel panel-green margin-bottom-40">
-      <div class="panel-heading">
-        <div class="panel-title"><i class="fa fa-user"></i><h1 class="p-title text-center">Portfolio Summary</h1></div>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover table-striped">
-          <tr>
-            <th></th>
-            <th ng-click="changeOrderAttribute('ticker')">Investments</th>
-            <th ng-click="changeOrderAttribute('purchase_date')">Purchase Date</th>
-            <th ng-click="changeOrderAttribute('cost_basis')">Cost</th>
-            <th ng-click="changeOrderAttribute('gainLoss')" class="text-center">G/L</th>
-            <th ng-click="changeOrderAttribute('currentValue')" class="text-center">MV</th>
-            <th ng-click="changeOrderAttribute('weighting')" class="text-center">Weighting</th>
-            <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
-            <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
-            <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">SI Return</th>
-            <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
-            <th ng-click="changeOrderAttribute('sharpe')" class="text-center">RA Return</th>
-            <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
-            <th>Remove</th>
-          </tr>
-          <tr ng-repeat="investmentPortfolio in investmentPortfolios | orderBy:orderAttribute:isOrderDescending">
-            <td class="text-center">a<!-- <img id="logo-portfolio" src="{{ investmentPortfolio.logo }}"> --></td>
-            <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
-            <td>{{ investmentPortfolio.purchase_date }}</td>
-            <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
-            <td ng-class="{positive: investmentPortfolio.gainLoss > 0, negative: investmentPortfolio.gainLoss < 0}" class="text-center">0{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
-            <td class="text-center">0{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
-            <td class="text-center">{{ investmentPortfolio.weighting * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: investmentPortfolio.ytdReturn > 0, negative: investmentPortfolio.ytdReturn < 0}" class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number : 2  }}%</td>
-            <td ng-class="{positive: investmentPortfolio.sixMonthReturn > 0, negative: investmentPortfolio.sixMonthReturn < 0}" class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
-            <td ng-class="{positive: investmentPortfolio.sinceInception > 0, negative: investmentPortfolio.sinceInception < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
-            <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
-            <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
-            <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
-            <td class="text-center">
-              <%= link_to("/investment_portfolios/{{ investmentPortfolio.id }}", method: :delete) do %>
-                <i class="fa fa-trash"></i>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-          <td></td>
-            <td><strong>Total</strong></td>
-            <td class="text-center">-</td>
-            <td>{{ getTotalCost() | currency : $ : 2 }}</td>
-            <td ng-class="{positive: totalGainLoss > 0, negative: totalGainLoss < 0}"  class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
-            <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
-            <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
-            <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}%</td>
-            <td class="text-center">{{ totalPortfolioRisk * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center">{{ totalPortfolioSharpe - 1 | number : 2 }}</td>
-            <td class="text-center">{{ totalPortfolioCorrelation - 1 | number : 2 }}</td>
-            <td class="text-center"></td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    <p class="delete-margin" style="clear: both"><%= link_to 'Delete Portfolio', "/portfolios/#{@portfolio.id}", method: :delete, class:"btn btn-danger" %></p>
   </div>
 </div>
 
-<p><%= link_to 'Delete Portfolio', "/portfolios/#{@portfolio.id}", method: :delete, class:"btn btn-danger" %></p>
 
 
 
