@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="/assets/plugins/animate.css">
     <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
+    <link rel="stylesheet" href="/assets/plugins/fancybox/source/jquery.fancybox.css">
     <link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="/assets/plugins/layer-slider/layerslider/css/layerslider.css">
 
@@ -47,8 +49,9 @@
     <link rel="stylesheet" href="/assets/css/custom.css">
   </head>
 
-  <body class="header-fixed header-fixed-space">
+  <body class="header-fixed">
     <div class="wrapper">
+      <!--=== Header v6 ===-->
       <div class="header-v6 header-classic-white header-sticky">
         <!-- Navbar -->
         <div class="navbar mega-menu" role="navigation">
@@ -121,6 +124,17 @@
         </div>
         <!-- End Navbar -->
       </div>
+      <!--=== End Header v6 ===-->
+
+      <!-- Interactive Slider v2 -->
+<!--       <div class="interactive-slider-v2 img-v4">
+        <div class="container">
+          <h1>Welcome to Huge Returnz</h1>
+          <br><br><br><br><br><br><br>
+        </div>
+      </div> -->
+      <!-- End Interactive Slider v2 -->
+
       <div>
         <% flash.each do |name, message| %>
           <div class="alert alert-<%= name %> alert-dismissible" role="alert">
@@ -128,10 +142,10 @@
             <%= message %>
           </div>
         <% end %>
+      </div>
 
-        <div class="container">
-          <%= yield %>
-        </div>
+      <div>
+        <%= yield %>
       </div>
 
       <div class="footer-v1">
@@ -141,54 +155,94 @@
               <div class="col-md-6">
                 <p>
                   2017 &copy; All Rights Reserved.
+                  <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                 </p>
               </div>
+
+              <!-- Social Links -->
+              <div class="col-md-6">
+                <ul class="footer-socials list-inline">
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+                      <i class="fa fa-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+                      <i class="fa fa-skype"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+                      <i class="fa fa-google-plus"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+                      <i class="fa fa-linkedin"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+                      <i class="fa fa-pinterest"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
+                      <i class="fa fa-dribbble"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- End Social Links -->
             </div>
           </div>
-        </div>
+        </div><!--/copyright-->
       </div>
+
     </div><!--/wrapper-->
 
     <!-- Highcharts -->
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-    <!-- <script src="/js/themes/dark-unica.js"></script> -->
-    <!-- End Highcharts -->
 
     <!-- JS Global Compulsory -->
-    <script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="/assets/plugins/smoothScroll.js"></script>
-    <script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-    <script type="text/javascript" src="/assets/plugins/layer-slider/layerslider/js/greensock.js"></script>
-    <script type="text/javascript" src="/assets/plugins/layer-slider/layerslider/js/layerslider.transitions.js"></script>
-    <script type="text/javascript" src="/assets/plugins/layer-slider/layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+    <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+    <script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
+<!--     <script type="text/javascript" src="assets/plugins/parallax-slider/js/modernizr.js"></script>
+    <script type="text/javascript" src="assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+    <script type="text/javascript" src="assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script> -->
+    <script type="text/javascript" src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
     <!-- JS Customization -->
-    <script type="text/javascript" src="/assets/js/custom.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
     <!-- JS Page Level -->
-    <script type="text/javascript" src="/assets/js/app.js"></script>
-    <script type="text/javascript" src="/assets/js/plugins/layer-slider.js"></script>
-    <script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
-    <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
-    <script type="text/javascript" src="/assets/js/plugins/owl-recent-works.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="assets/js/app.js"></script>
+<!--     <script type="text/javascript" src="assets/js/plugins/fancy-box.js"></script>
+ -->    <script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>
+<!--     <script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
+ -->    <script type="text/javascript">
       jQuery(document).ready(function() {
         App.init();
-        LayerSlider.initLayerSlider();
-        StyleSwitcher.initStyleSwitcher();
+        App.initParallaxBg();
+        FancyBox.initFancybox();
         OwlCarousel.initOwlCarousel();
-        OwlRecentWorks.initOwlRecentWorksV2();
+        StyleSwitcher.initStyleSwitcher();
       });
     </script>
-<!--[if lt IE 9]>
-<script src="/assets/plugins/respond.js"></script>
-<script src="/assets/plugins/html5shiv.js"></script>
-<script src="/assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
-
-
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+    <![endif]-->
   </body>
 </html>

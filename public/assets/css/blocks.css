@@ -249,7 +249,7 @@
   overflow: hidden;
   padding: 10px 0 6px;
   border-bottom: solid 1px #eee;
-  background: url(../img/patterns/breadcrumbs.png) repeat;
+  background: url("/assets/backgroundpattern.jpg") repeat;
 }
 
 .video-business-img1 {
@@ -3584,9 +3584,10 @@
 }
 
 .interactive-slider-v2.img-v4 {
-  background: url(../img/bg/img9.jpg) no-repeat;
+  background: url(../img/bg/bull.jpg) no-repeat;
   background-size: cover;
   background-position: center center;
+  height: 100%;
 }
 
 .interactive-slider-v2.intro-promo-img {

@@ -1,73 +1,80 @@
-<img class="bull-image" src="/assets/img/bull.jpg">
-
-<div class="top-margin">
-  <% if current_user %>
-    <!-- modal begins -->
-    <div class="margin-bottom-40">
-      <button class="btn-u" data-toggle="modal" data-target="#responsive">Create New Portfolio</button>
-      <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <form action="/portfolios" method="post">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel4">New Portfolio</h4>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h4>Name</h4>
-                    <p><input class="form-control" type="text" name="name" id="name"></p>
-                    <%= hidden_field_tag :user_id, current_user.id %>
-                    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<!-- Interactive Slider v2 -->
+<div class="interactive-slider-v2 img-v4">
+  <div class="container">
+    <h1>Welcome to Huge Returnz</h1>
+    <br><br><br><br><br><br><br>
+  </div>
+</div>
+<!-- End Interactive Slider v2 -->
+<div class="container">
+  <div class="top-margin">
+    <% if current_user %>
+      <!-- modal begins -->
+      <div class="margin-bottom-40">
+        <button class="btn-u" data-toggle="modal" data-target="#responsive">Create New Portfolio</button>
+        <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <form action="/portfolios" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel4">New Portfolio</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h4>Name</h4>
+                      <p><input class="form-control" type="text" name="name" id="name"></p>
+                      <%= hidden_field_tag :user_id, current_user.id %>
+                      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
-    </div><!-- modal ends -->
-  <% end %>
-</div>
+          </form>
+        </div>
+      </div><!-- modal ends -->
+    <% end %>
+  </div>
 
-<div ng-app="app">
-  <div ng-controller="homepageCtrl" ng-init="setup()">
-    <!-- performance table begins -->
-    <h1 class="text-center">Top 10 YTD Performance</h1>
-    <div class="panel panel-blue margin-bottom-40">
-      <div class="panel-heading">
-        <i class="fa fa-tasks"></i>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover">
-          <tr>
-            <th ng-click="changeOrderAttribute('name')">Portfolio</th>
-            <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
-            <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
-            <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">Since Inception Return</th>
-            <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
-            <th ng-click="changeOrderAttribute('sharpe')" class="text-center">Risk Adjusted Return</th>
-            <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
-          </tr>
-          <tr ng-repeat="portfolio in portfolios | orderBy:orderAttribute:isOrderDescending"">
-            <td class="aqua"><strong>{{ portfolio.name }}</strong></td>
-            <td ng-class="{positive: portfolio.ytdReturn > 0, negative: portfolio.ytdReturn < 0}"  class="text-center" class="text-center">{{ portfolio.ytdReturn | number : 2  }}%</td>
-            <td ng-class="{positive: portfolio.sixMonthReturn > 0, negative: portfolio.sixMonthReturn < 0}"  class="text-center" class="text-center">{{ portfolio.sixMonthReturn | number : 2  }}%</td>
-            <td ng-class="{positive: portfolio.inceptionReturn > 0, negative: portfolio.inceptionReturn < 0}"  class="text-center" class="text-center">{{ portfolio.inceptionReturn | number : 2  }}%</td>
-            <td class="text-center">{{ portfolio.standardDeviation * 100 | number : 2 }}%</td>
-            <td ng-class="{positive: portfolio.sharpe > 0, negative: portfolio.sharpe < 0}"  class="text-center" class="text-center">{{ portfolio.sharpe | number : 2 }}</td>
-            <td class="text-center">{{ portfolio.correlation | number : 2 }}</td>
-          </tr>
-        </table>
+  <div ng-app="app">
+    <div ng-controller="homepageCtrl" ng-init="setup()">
+      <!-- performance table begins -->
+      <h1 class="text-center">Top 10 YTD Performance</h1>
+      <div class="panel panel-blue margin-bottom-40">
+        <div class="panel-heading">
+          <i class="fa fa-tasks"></i>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            <tr>
+              <th ng-click="changeOrderAttribute('name')">Portfolio</th>
+              <th ng-click="changeOrderAttribute('ytdReturn')" class="text-center">YTD Return</th>
+              <th ng-click="changeOrderAttribute('sixMonthReturn')" class="text-center">6 Mo. Return</th>
+              <th ng-click="changeOrderAttribute('sinceInceptionReturn')" class="text-center">Since Inception Return</th>
+              <th ng-click="changeOrderAttribute('standard_deviation')" class="text-center">Risk</th>
+              <th ng-click="changeOrderAttribute('sharpe')" class="text-center">Risk Adjusted Return</th>
+              <th ng-click="changeOrderAttribute('correlation')" class="text-center">Correlation</th>
+            </tr>
+            <tr ng-repeat="portfolio in portfolios | orderBy:orderAttribute:isOrderDescending"">
+              <td class="aqua"><strong>{{ portfolio.name }}</strong></td>
+              <td ng-class="{positive: portfolio.ytdReturn > 0, negative: portfolio.ytdReturn < 0}"  class="text-center" class="text-center">{{ portfolio.ytdReturn | number : 2  }}%</td>
+              <td ng-class="{positive: portfolio.sixMonthReturn > 0, negative: portfolio.sixMonthReturn < 0}"  class="text-center" class="text-center">{{ portfolio.sixMonthReturn | number : 2  }}%</td>
+              <td ng-class="{positive: portfolio.inceptionReturn > 0, negative: portfolio.inceptionReturn < 0}"  class="text-center" class="text-center">{{ portfolio.inceptionReturn | number : 2  }}%</td>
+              <td class="text-center">{{ portfolio.standardDeviation * 100 | number : 2 }}%</td>
+              <td ng-class="{positive: portfolio.sharpe > 0, negative: portfolio.sharpe < 0}"  class="text-center" class="text-center">{{ portfolio.sharpe | number : 2 }}</td>
+              <td class="text-center">{{ portfolio.correlation | number : 2 }}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
