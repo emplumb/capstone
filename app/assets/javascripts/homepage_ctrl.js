@@ -19,14 +19,14 @@
         });
       });
     };
-    // $scope.orderAttribute = portfolio.ytdReturn;
-    // $scope.isOrderDescending = false;
+    $scope.orderAttribute = 'ytdReturn';
+    $scope.isOrderDescending = true;
 
     $scope.changeOrderAttribute = function(inputAttribute) {
       if (inputAttribute === $scope.orderAttribute) {
         $scope.isOrderDescending = !$scope.isOrderDescending;
       } else {
-        $scope.isOrderDescending = false;
+        $scope.isOrderDescending = true;
       }
       $scope.orderAttribute = inputAttribute;
     };

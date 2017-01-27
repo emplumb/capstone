@@ -6,15 +6,15 @@
   }
 </style>
 
+<%= link_to "Search Investments", "/investments",  class: "btn btn-primary" %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-          <h2><%= @name %></h2>
-          <h4><%= @symbol %></h4>
-        </div>
-        <div class="col-sm-2"><img id="logo-show" src="<%= @investment.logo %>"></div>
+
+<div class="row">
+    <div class="col-sm-2">
+      <h2><%= @name %></h2>
+      <h4><%= @symbol %></h4>
     </div>
+    <div class="col-sm-2"><img id="logo-show" src="<%= @investment.logo %>"></div>
 </div>
 
 <p>
@@ -97,21 +97,26 @@
 </p>
 
 <div style="clear: both">
-  <%= form_tag "/investment_portfolios", method: :post do %>
+  <%= form_tag "/investment_portfolios", method: :post, class: "sky-form" do %>
     <%= hidden_field_tag :investment_id, @investment.id %>
     <%= hidden_field_tag :portfolio_id, current_user.portfolios.first.id %>
     <%= hidden_field_tag :ticker, @investment.ticker %>
     <%= hidden_field_tag :purchase_price, @current_price %>
-    <div>
-      Dollar amount:
-      <%= text_field_tag :cost_basis %>
-    </div>
-    <div>
-      Date purchased:
-      <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d")) %>
-    </div>
-    <p></p>
-    <%= submit_tag "Add to portfolio", class: "btn btn-success" %>
+    <header>Add Investment To Your Portfolio</header>
+    <fieldset>
+      <section class="col col-4">
+        <label class="label">Amount Purchased ($)</label>
+        <label class="input">
+          <%= text_field_tag :cost_basis, '', class: "input" %>
+        </label>
+        <label class="label">Date Purchased</label>
+        <label class="input">
+          <%= date_field_tag(:purchase_date, Date.today.strftime("%Y-%m-%d"))  %>
+        </label>
+      </section>
+    </fieldset>
+    <footer>
+      <%= submit_tag "Submit", class: "btn-u" %>
+    </footer>
   <% end %>
 </div>
-

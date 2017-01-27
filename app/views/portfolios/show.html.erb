@@ -1,9 +1,10 @@
 <div ng-app="app">
   <div ng-controller="portfoliosCtrl" ng-init="setup()">
-    <div style="margin-top: 125px">
+    <div style="margin-top: 100px">
       <div class="breadcrumbs">
         <div class="container" id="portfolio-name">
-          <h1 class="pull-left"><div class="aqua"><%= @portfolio.name.upcase %></div></h1>
+          <br>
+          <h1 class="pull-left"><div class="aqua"><strong><%= @portfolio.name.upcase %></strong></div></h1>
         </div>
       </div>
     </div>
@@ -35,12 +36,12 @@
               <td><strong><a href="/investments/{{ investmentPortfolio.investment_id }}">{{ investmentPortfolio.ticker }}</a></strong></td>
               <td>{{ investmentPortfolio.purchase_date }}</td>
               <td>{{ investmentPortfolio.cost_basis | currency : $ : 2 }}</td>
-              <td ng-class="{positive: investmentPortfolio.gainLoss > 0, negative: investmentPortfolio.gainLoss < 0}" class="text-center">0{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
-              <td class="text-center">0{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
+              <td ng-class="{positive: investmentPortfolio.gainLoss > 0, negative: investmentPortfolio.gainLoss < 0}" class="text-center">{{ investmentPortfolio.gainLoss | currency : $ : 2 }}</td>
+              <td class="text-center">{{ investmentPortfolio.currentValue | currency : $ : 2  }}</td>
               <td class="text-center">{{ investmentPortfolio.weighting * 100 | number : 2 }}%</td>
               <td ng-class="{positive: investmentPortfolio.ytdReturn > 0, negative: investmentPortfolio.ytdReturn < 0}" class="text-center">{{ investmentPortfolio.ytdReturn * 100 | number : 2  }}%</td>
               <td ng-class="{positive: investmentPortfolio.sixMonthReturn > 0, negative: investmentPortfolio.sixMonthReturn < 0}" class="text-center">{{ investmentPortfolio.sixMonthReturn * 100 | number : 2  }}%</td>
-              <td ng-class="{positive: investmentPortfolio.sinceInception > 0, negative: investmentPortfolio.sinceInception < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
+              <td ng-class="{positive: investmentPortfolio.sinceInceptionReturn > 0, negative: investmentPortfolio.sinceInceptionReturn < 0}" class="text-center">{{ investmentPortfolio.sinceInceptionReturn * 100 | number :2  }}%</td>
               <td class="text-center">{{ investmentPortfolio.standard_deviation * 100 | number :2 }}%</td>
               <td ng-class="{positive: investmentPortfolio.sharpe > 0, negative: investmentPortfolio.sharpe < 0}" class="text-center">{{ investmentPortfolio.sharpe | number : 2 }}</td>
               <td class="text-center">{{ investmentPortfolio.correlation | number :2 }}</td>
@@ -58,9 +59,9 @@
               <td ng-class="{positive: totalGainLoss > 0, negative: totalGainLoss < 0}"  class="text-center">{{ totalGainLoss | currency : $ : 2 }}</td>
               <td class="text-center">{{ totalCurrentValue | currency : $ : 2 }}</td>
               <td class="text-center">{{ totalWeighting * 100 | number : 0 }}%</td>
-              <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}%</td>
-              <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}%</td>
-              <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}%</td>
+              <td ng-class="{positive: weightedYtdReturn > 0, negative: weightedYtdReturn < 0}"  class="text-center">{{ weightedYtdReturn * 100 | number : 2 }}</td>
+              <td ng-class="{positive: weightedSixMonthReturn > 0, negative: weightedSixMonthReturn < 0}"  class="text-center">{{ weightedSixMonthReturn * 100 | number : 2 }}</td>
+              <td ng-class="{positive: weightedSinceInceptionReturn > 0, negative: weightedSinceInceptionReturn < 0}"  class="text-center">{{ weightedSinceInceptionReturn * 100 | number : 2 }}</td>
               <td class="text-center">{{ totalPortfolioRisk * 100 | number : 2 }}%</td>
               <td ng-class="{positive: totalPortfolioSharpe > 0, negative: totalPortfolioSharpe < 0}"  class="text-center">{{ totalPortfolioSharpe - 1 | number : 2 }}</td>
               <td class="text-center">{{ totalPortfolioCorrelation - 1 | number : 2 }}</td>
@@ -71,7 +72,8 @@
       </div>
 
       <div class="col-md-offset-3 col-md-5"></div>
-      <div class="port-chart-padding margin-bottom" id="single-series-home"></div>
+      <!-- <div class="port-chart-padding margin-bottom" id="single-series-home"></div> -->
+      <div class="port-chart-padding margin-bottom" id="comparison-series"></div>
       <div class="col-md-4 link-effects">
         <div class="tag-box">
           <div class="headline"><h2 class="heading-sm">Intraday Prices</h2></div>
